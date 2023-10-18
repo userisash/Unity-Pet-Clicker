@@ -239,8 +239,8 @@ RectTransform:
   m_GameObject: {fileID: 195509986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.67, y: 0.67, z: 0.67}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 447725543}
   - {fileID: 1962808402}
@@ -249,7 +249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 282, y: -33}
+  m_AnchoredPosition: {x: 100, y: -33}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &263505065
@@ -277,8 +277,8 @@ RectTransform:
   m_GameObject: {fileID: 263505065}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.67, y: 0.67, z: 0.67}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1774100961}
   - {fileID: 1174839655}
@@ -287,7 +287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -33}
+  m_AnchoredPosition: {x: 166, y: -33}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &272009350
@@ -461,8 +461,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 68.75, y: 70.43106}
-  m_SizeDelta: {x: 129.5, y: 49.1378}
+  m_AnchoredPosition: {x: 80.6, y: 59}
+  m_SizeDelta: {x: 129.5, y: 26.2069}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &274022760
 MonoBehaviour:
@@ -3657,8 +3657,8 @@ RectTransform:
   m_GameObject: {fileID: 1952764198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.67, y: 0.67, z: 0.67}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 324209702}
   - {fileID: 395042330}
@@ -3917,6 +3917,12 @@ MonoBehaviour:
   tierFourButton: {fileID: 1546907732}
   tierFiveButton: {fileID: 1464793481}
   tierSixButton: {fileID: 481548364}
+  tierOneCost: 10
+  tierTwoCost: 20
+  tierThreeCost: 40
+  tierFourCost: 80
+  tierFiveCost: 160
+  tierSixCost: 320
 --- !u!4 &2003655510
 Transform:
   m_ObjectHideFlags: 0
