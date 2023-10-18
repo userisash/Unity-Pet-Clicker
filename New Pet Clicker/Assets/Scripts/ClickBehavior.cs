@@ -27,7 +27,7 @@ public class ClickBehavior : MonoBehaviour
         IncrementViews();
     }
 
-    private void IncrementViews()
+    public void IncrementViews()
     {
         views += viewsPerClick;
         UpdateViewsText();
@@ -38,7 +38,7 @@ public class ClickBehavior : MonoBehaviour
         }
     }
 
-    private void IncrementFollowers()
+    public void IncrementFollowers()
     {
         followers += followersPerClick;
         UpdateFollowersText();
@@ -49,11 +49,37 @@ public class ClickBehavior : MonoBehaviour
         }
     }
 
-    private void IncrementCash()
+    public void IncrementCash()
     {
         cash += cashPerClick;
         UpdateCashText();
     }
+
+    public void DirectlyAddViews(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            IncrementViews();
+        }
+    }
+
+    public void DirectlyAddFollowers(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            IncrementFollowers();
+        }
+    }
+
+    public void DirectlyAddCash(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            IncrementCash();
+        }
+    }
+
+
 
     public void UpdateViewsText()
     {

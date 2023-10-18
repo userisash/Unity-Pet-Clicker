@@ -15,12 +15,12 @@ public class UpgradeManager : MonoBehaviour
     public Button tierFiveButton;
     public Button tierSixButton;
 
-    private int tierOneCost = 10;
-    private int tierTwoCost = 20;
-    private int tierThreeCost = 40;
-    private int tierFourCost = 80;
-    private int tierFiveCost = 160;
-    private int tierSixCost = 320;
+    public int tierOneCost = 10;
+    public int tierTwoCost = 20;
+    public int tierThreeCost = 40;
+    public int tierFourCost = 80;
+    public int tierFiveCost = 160;
+    public int tierSixCost = 320;
 
     private void Update()
     {
@@ -33,8 +33,11 @@ public class UpgradeManager : MonoBehaviour
         if (ClickBehavior.GetCash() >= tierOneCost)
         {
             ClickBehavior.AddCash(-tierOneCost);
-            ClickBehavior.SetClickValues(2, 0, 0);
-            tierOneCost *= 2; // Double the cost for next purchase
+
+            ClickBehavior.DirectlyAddViews(2);
+            // Tier one doesn't add followers or cash directly.
+
+            tierOneCost *= 2;
         }
     }
 
@@ -44,6 +47,7 @@ public class UpgradeManager : MonoBehaviour
         {
             ClickBehavior.AddCash(-tierTwoCost);
             ClickBehavior.SetClickValues(2, 1, 0);
+            CheckCountersTens();
             tierTwoCost *= 2;
         }
     }
@@ -54,6 +58,7 @@ public class UpgradeManager : MonoBehaviour
         {
             ClickBehavior.AddCash(-tierThreeCost);
             ClickBehavior.SetClickValues(4, 2, 0);
+            CheckCountersTens();
             tierThreeCost *= 2;
         }
     }
@@ -64,6 +69,7 @@ public class UpgradeManager : MonoBehaviour
         {
             ClickBehavior.AddCash(-tierFourCost);
             ClickBehavior.SetClickValues(8, 4, 1);
+            CheckCountersTens();
             tierFourCost *= 2;
         }
     }
@@ -74,6 +80,7 @@ public class UpgradeManager : MonoBehaviour
         {
             ClickBehavior.AddCash(-tierFiveCost);
             ClickBehavior.SetClickValues(32, 8, 4);
+            CheckCountersTens();
             tierFiveCost *= 2;
         }
     }
@@ -84,11 +91,25 @@ public class UpgradeManager : MonoBehaviour
         {
             ClickBehavior.AddCash(-tierSixCost);
             ClickBehavior.SetClickValues(64, 16, 8);
+            CheckCountersTens();
             tierSixCost *= 2;
         }
     }
 
     // ... Similarly for other tiers ...
+
+    private void CheckCountersTens()
+    {
+        if (ClickBehavior.views % 10 == 0)
+        {
+            ClickBehavior.followers++;
+        }
+
+        if (ClickBehavior.followers % 10 == 0)
+        {
+            ClickBehavior.cash++;
+        }
+    }
 
     private void UpdateButtonInteractability()
     {
