@@ -7,109 +7,90 @@ public class ClickBehavior : MonoBehaviour
     public TextMeshProUGUI followersText;
     public TextMeshProUGUI cashText;
 
-    public int views = 0;
-    public int followers = 0;
-    public int cash = 10;
-  
-    private int viewsPerClick = 1;
-    private int followersPerClick = 1;
-    private int cashPerClick = 1;
+    private int views = 0;
+    private int followers = 0;
+    private int cash = 20;
 
-    public void SetClickValues(int views, int followers, int cash)
-    {
-        viewsPerClick = views;
-        followersPerClick = followers;
-        cashPerClick = cash;
-    }
+    private int viewsPerClick = 1;
+    private int followersPerClick = 1; // for future upgrades
+    private int cashPerClick = 1;      // for future upgrades
+
+    private int lastAwardedFollowersAtViews = 0;
+    private int lastAwardedCashAtFollowers = 0;
+
 
     public void OnButtonClick()
     {
         IncrementViews();
+        UpdateAllText();
     }
 
-    public void IncrementViews()
+    private void IncrementViews()
     {
         views += viewsPerClick;
-        UpdateViewsText();
 
-        if (views % 10 == 0)
-        {
-            IncrementFollowers();
-        }
+        // Check if followers should be incremented
+        CheckCounters();
     }
 
-    public void IncrementFollowers()
+    private void IncrementFollowers()
     {
         followers += followersPerClick;
-        UpdateFollowersText();
 
-        if (followers % 10 == 0)
-        {
-            IncrementCash();
-        }
+        // Check if cash should be incremented
+        CheckCounters();
     }
 
-    public void IncrementCash()
+    private void IncrementCash()
     {
         cash += cashPerClick;
-        UpdateCashText();
     }
 
-    public void DirectlyAddViews(int amount)
+    public void CheckCounters()
     {
-        for (int i = 0; i < amount; i++)
-        {
-            IncrementViews();
-        }
-    }
+        int maxIterations = 10; // for safety
 
-    public void DirectlyAddFollowers(int amount)
-    {
-        for (int i = 0; i < amount; i++)
+        int iterations = 0;
+        while ((views - lastAwardedFollowersAtViews) >= 10 && iterations < maxIterations)
         {
+            lastAwardedFollowersAtViews += 10;
             IncrementFollowers();
+            iterations++;
         }
-    }
 
-    public void DirectlyAddCash(int amount)
-    {
-        for (int i = 0; i < amount; i++)
+        iterations = 0;
+        while ((followers - lastAwardedCashAtFollowers) >= 10 && iterations < maxIterations)
         {
+            lastAwardedCashAtFollowers += 10;
             IncrementCash();
+            iterations++;
         }
     }
 
 
-
-    public void UpdateViewsText()
+    private void UpdateAllText()
     {
-        viewsText.text = " " + views.ToString();
+        viewsText.text = views.ToString();
+        followersText.text = followers.ToString();
+        cashText.text = cash.ToString();
     }
 
-    public void UpdateFollowersText()
+    public void AddToClickValues(int viewsIncrement, int followersIncrement, int cashIncrement)
     {
-        followersText.text = " " + followers.ToString();
+        viewsPerClick += viewsIncrement;
+        followersPerClick += followersIncrement;
+        cashPerClick += cashIncrement;
     }
 
-    public void UpdateCashText()
-    {
-        cashText.text = " " + cash.ToString();
-    }
-
-    public void AddCash(int amount)
-    {
-        cash += amount;
-        UpdateCashText();
-    }
 
     public int GetCash()
     {
         return cash;
     }
 
-    public void AddFollowers(int amount)
+    public void AddCash(int amount)
     {
-        followers += amount;
-        UpdateFollowersText();
+        cash += amount;
+        UpdateAllText();
     }
 }
