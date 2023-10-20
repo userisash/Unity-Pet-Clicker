@@ -46,7 +46,7 @@ public class ClickBehavior : MonoBehaviour
         CheckCounters();
     }
 
-    private void IncrementFollowers()
+    public void IncrementFollowers()
     {
         followers += followersPerClick;
 
@@ -54,7 +54,7 @@ public class ClickBehavior : MonoBehaviour
         CheckCounters();
     }
 
-    private void IncrementCash()
+    public void IncrementCash()
     {
         cash += cashPerClick;
     }
