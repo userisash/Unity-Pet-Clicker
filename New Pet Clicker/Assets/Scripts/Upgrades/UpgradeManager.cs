@@ -35,6 +35,8 @@ public class UpgradeManager : MonoBehaviour
         //... Similarly for other tiers...
     }
 
+
+
     public void PurchaseTierOneUpgrade()
     {
         if (ClickBehavior.GetCash() >= tierOneCost)
@@ -58,6 +60,7 @@ public class UpgradeManager : MonoBehaviour
             UpdateText(tierTwoCostText, tierTwoCost);
         }
     }
+
 
     private void UpdateAllTexts()
     {
