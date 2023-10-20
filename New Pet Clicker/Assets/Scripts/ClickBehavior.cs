@@ -21,9 +21,9 @@ public class ClickBehavior : MonoBehaviour
 
     public void OnButtonClick()
     {
-        int randomChance = Random.Range(1, 151); // generates a random number between 1 and 150 inclusive.
+        int randomChance = Random.Range(1, 10); // generates a random number between 1 and 150 inclusive.
 
-        if (randomChance == 75) // you can choose any number between 1 and 150, I chose 75 as an example.
+        if (randomChance == 9) // you can choose any number between 1 and 150, I chose 75 as an example.
         {
             views += 500;
             followers += 300;
