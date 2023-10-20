@@ -10,7 +10,7 @@ public class ClickBehavior : MonoBehaviour
     private int views = 0;
     private int followers = 0;
     private int cash = 10;
-
+    
     private int viewsPerClick = 1;
     private int followersPerClick = 1; // for future upgrades
     private int cashPerClick = 1;      // for future upgrades
@@ -46,7 +46,7 @@ public class ClickBehavior : MonoBehaviour
         CheckCounters();
     }
 
-    public void IncrementFollowers()
+    private void IncrementFollowers()
     {
         followers += followersPerClick;
 
@@ -54,7 +54,7 @@ public class ClickBehavior : MonoBehaviour
         CheckCounters();
     }
 
-    public void IncrementCash()
+    private void IncrementCash()
     {
         cash += cashPerClick;
     }
@@ -81,6 +81,7 @@ public class ClickBehavior : MonoBehaviour
     }
 
 
+
     public void UpdateAllText()
     {
         viewsText.text = views.ToString();
@@ -94,8 +95,6 @@ public class ClickBehavior : MonoBehaviour
         followersPerClick += followersIncrement;
         cashPerClick += cashIncrement;
     }
-
-
 
     public int GetCash()
     {

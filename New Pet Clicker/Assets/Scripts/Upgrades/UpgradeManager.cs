@@ -35,6 +35,13 @@ public class UpgradeManager : MonoBehaviour
         //... Similarly for other tiers...
     }
 
+    private void UpdateButtonInteractability()
+    {
+        tierOneButton.interactable = ClickBehavior.GetCash() >= tierOneCost;
+        tierTwoButton.interactable = ClickBehavior.GetCash() >= tierTwoCost;
+        //... Similarly for other tiers...
+    }
+
     public void PurchaseTierOneUpgrade()
     {
         if (ClickBehavior.GetCash() >= tierOneCost)
@@ -58,6 +65,7 @@ public class UpgradeManager : MonoBehaviour
             UpdateText(tierTwoCostText, tierTwoCost);
         }
     }
+
 
     private void UpdateAllTexts()
     {
