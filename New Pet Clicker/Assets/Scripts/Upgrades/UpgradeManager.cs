@@ -1,10 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UpgradeManager : MonoBehaviour
 {
     public ClickBehavior ClickBehavior;
     public GameObject popupMenu;
+
+    public TextMeshProUGUI tierOneCostText;
+    public TextMeshProUGUI tierTwoCostText;
+
+
+    public TextMeshProUGUI tierOneIncrementText;
+    public TextMeshProUGUI tierTwoIncrementText;
 
     public Button tierOneButton;
     public Button tierTwoButton;
@@ -17,6 +25,7 @@ public class UpgradeManager : MonoBehaviour
     private void Update()
     {
         UpdateButtonInteractability();
+        UpdateAllTexts();
     }
 
     private void UpdateButtonInteractability()
@@ -33,8 +42,10 @@ public class UpgradeManager : MonoBehaviour
             ClickBehavior.AddCash(-tierOneCost);
             ClickBehavior.AddToClickValues(2, 0, 0);
             tierOneCost *= 2;
+            UpdateText(tierOneCostText, tierOneCost);
         }
     }
+
 
 
     public void PurchaseTierTwoUpgrade()
@@ -44,9 +55,24 @@ public class UpgradeManager : MonoBehaviour
             ClickBehavior.AddCash(-tierTwoCost);
             ClickBehavior.AddToClickValues(2, 2, 0);
             tierTwoCost *= 2;
+            UpdateText(tierTwoCostText, tierTwoCost);
         }
     }
 
+    private void UpdateAllTexts()
+    {
+        UpdateText(tierOneCostText, tierOneCost);
+        UpdateText(tierTwoCostText, tierTwoCost);
+       
+        tierOneIncrementText.text = "Views +2";
+        tierTwoIncrementText.text = "Views +2, Followers +1";
+       
+    }
+
+    private void UpdateText(TextMeshProUGUI targetText, int value)
+    {
+        targetText.text = "$: " + value.ToString();
+    }
 
     //... repeat for other tiers...
 
