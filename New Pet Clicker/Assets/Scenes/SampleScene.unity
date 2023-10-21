@@ -7201,14 +7201,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClickBehavior: {fileID: 793234379}
   popupMenu: {fileID: 1109820705}
-  tierOneCostText: {fileID: 486302069}
-  tierTwoCostText: {fileID: 1922286611}
-  tierOneIncrementText: {fileID: 357686313}
-  tierTwoIncrementText: {fileID: 402885175}
-  tierOneButton: {fileID: 295494033}
-  tierTwoButton: {fileID: 1739520639}
-  tierOneCost: 10
-  tierTwoCost: 20
+  tiers:
+  - Name: 'Ads Upgrade '
+    CostText: {fileID: 486302069}
+    IncrementText: {fileID: 357686313}
+    PurchaseButton: {fileID: 295494033}
+    Cost: 10
+    ViewsIncrement: 2
+    FollowersIncrement: 0
+    CashIncrement: 0
+  - Name: 'Sponsers '
+    CostText: {fileID: 1922286611}
+    IncrementText: {fileID: 402885175}
+    PurchaseButton: {fileID: 1739520639}
+    Cost: 20
+    ViewsIncrement: 2
+    FollowersIncrement: 2
+    CashIncrement: 0
 --- !u!4 &2003655510
 Transform:
   m_ObjectHideFlags: 0
