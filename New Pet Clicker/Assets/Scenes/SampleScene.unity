@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.000059983136, y: 0}
   m_SizeDelta: {x: 0, y: 70}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &42373452
@@ -3528,22 +3528,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClickBehavior: {fileID: 793234379}
-  viewsManagerCost: 10
-  viewsIncrementValue: 0.5
-  followersManagerCost: 20
-  followersIncrementValue: 0.5
-  cashManagerCost: 40
-  cashIncrementValue: 0.5
-  viewsManagerCostText: {fileID: 204404414}
-  viewsIncrementValueText: {fileID: 964283317}
-  viewsManagerButton: {fileID: 1061217205}
-  followersManagerCostText: {fileID: 480585985}
-  followersIncrementValueText: {fileID: 1269249470}
-  followersManagerButton: {fileID: 1266759064}
-  cashManagerCostText: {fileID: 635326819}
-  cashIncrementValueText: {fileID: 2122069700}
-  cashManagerButton: {fileID: 1416813518}
-  managersMenu: {fileID: 1100645770}
+  managers:
+  - managerName: Views Manager
+    incrementValue: 1
+    cost: 10
+    costText: {fileID: 204404414}
+    incrementValueText: {fileID: 964283317}
+    purchaseButton: {fileID: 1061217205}
+    isActive: 0
+  - managerName: Followers Manager
+    incrementValue: 1
+    cost: 20
+    costText: {fileID: 480585985}
+    incrementValueText: {fileID: 1269249470}
+    purchaseButton: {fileID: 1266759064}
+    isActive: 0
+  - managerName: Cash Manager
+    incrementValue: 1
+    cost: 30
+    costText: {fileID: 635326819}
+    incrementValueText: {fileID: 2122069700}
+    purchaseButton: {fileID: 1416813518}
+    isActive: 0
 --- !u!4 &889898990
 Transform:
   m_ObjectHideFlags: 0
@@ -4435,8 +4441,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 889898989}
         m_TargetAssemblyTypeName: Managers, Assembly-CSharp
-        m_MethodName: PurchaseViewsManager
-        m_Mode: 1
+        m_MethodName: PurchaseManager
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5320,12 +5326,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 889898989}
         m_TargetAssemblyTypeName: Managers, Assembly-CSharp
-        m_MethodName: PurchaseFollowersManager
-        m_Mode: 1
+        m_MethodName: PurchaseManager
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5591,12 +5597,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 889898989}
         m_TargetAssemblyTypeName: Managers, Assembly-CSharp
-        m_MethodName: PurchaseCashManager
-        m_Mode: 1
+        m_MethodName: PurchaseManager
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
