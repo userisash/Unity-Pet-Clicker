@@ -1,160 +1,86 @@
-using UnityEngine;
-using TMPro;
+using System.Collections.Generic;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
+[System.Serializable]
+public class Manager
+{
+    public string managerName;
+    public float incrementValue;
+    public int cost;
+    public TextMeshProUGUI costText;
+    public TextMeshProUGUI incrementValueText;
+    public Button purchaseButton;
+    [HideInInspector]
+    public bool isActive = false;
+    public delegate void IncrementAction();
+    [HideInInspector]
+    public IncrementAction OnIncrement;
+}
 
 public class Managers : MonoBehaviour
 {
     public ClickBehavior ClickBehavior;
+    public List<Manager> managers;
 
-    public int viewsManagerCost = 10;
-    public float viewsIncrementValue = 1;
+    private void Start()
+    {
+        // Assuming you have 3 managers in the order: Views, Followers, Cash
+        managers[0].OnIncrement = ClickBehavior.IncrementViews;
+        managers[1].OnIncrement = ClickBehavior.IncrementFollowers;
+        managers[2].OnIncrement = ClickBehavior.IncrementCash;
+    }
 
-    public int followersManagerCost = 20;
-    public float followersIncrementValue = 1;
-
-    public int cashManagerCost = 40;
-    public float cashIncrementValue = 1;
-
-    private bool viewsManagerActive = false;
-    private bool followersManagerActive = false;
-    private bool cashManagerActive = false;
-
-
-    public TextMeshProUGUI viewsManagerCostText;
-    public TextMeshProUGUI viewsIncrementValueText;
-    public Button viewsManagerButton;
-
-    public TextMeshProUGUI followersManagerCostText;
-    public TextMeshProUGUI followersIncrementValueText;
-    public Button followersManagerButton;
-
-    public TextMeshProUGUI cashManagerCostText;
-    public TextMeshProUGUI cashIncrementValueText;
-    public Button cashManagerButton;
-
-    public GameObject managersMenu;
-
-
-     void Update()
+    private void Update()
     {
         CheckButtonInteractiblity();
     }
-    public void PurchaseViewsManager()
-    {
-        if (ClickBehavior.GetCash() >= viewsManagerCost)
-        {
-            ClickBehavior.AddCash(-viewsManagerCost);
 
-            if (!viewsManagerActive)
+    public void PurchaseManager(int managerIndex)
+    {
+        Manager manager = managers[managerIndex];
+        if (ClickBehavior.GetCash() >= manager.cost)
+        {
+            ClickBehavior.AddCash(-manager.cost);
+
+            if (!manager.isActive)
             {
-                StartCoroutine(AutoIncrementViews());
-                viewsManagerActive = true;
+                StartCoroutine(AutoIncrement(manager));
+                manager.isActive = true;
             }
 
-            viewsManagerCost *= 2;
-            viewsIncrementValue *= 2;
-            UpdateManagerTexts();
+            manager.cost *= 2;
+            manager.incrementValue *= 2;
+            UpdateManagerTexts(manager);
         }
     }
 
-    public void PurchaseFollowersManager()
-    {
-        if (ClickBehavior.GetCash() >= followersManagerCost)
-        {
-            ClickBehavior.AddCash(-followersManagerCost);
-
-            if (!followersManagerActive)
-            {
-                StartCoroutine(AutoIncrementFollowers());
-                followersManagerActive = true;
-            }
-
-            followersManagerCost *= 2;
-            followersIncrementValue *= 2;
-            UpdateManagerTexts();
-        }
-    }
-
-    public void PurchaseCashManager()
-    {
-        if (ClickBehavior.GetCash() >= cashManagerCost)
-        {
-            ClickBehavior.AddCash(-cashManagerCost);
-
-            if (!cashManagerActive)
-            {
-                StartCoroutine(AutoIncrementCash());
-                cashManagerActive = true;
-            }
-
-            cashManagerCost *= 2;
-            cashIncrementValue *= 2;
-            UpdateManagerTexts();
-        }
-    }
-
-
-    private IEnumerator AutoIncrementViews()
+    private IEnumerator AutoIncrement(Manager manager)
     {
         while (true)
         {
-            for (int i = 0; i < viewsIncrementValue; i++)
+            for (int i = 0; i < manager.incrementValue; i++)
             {
-                ClickBehavior.IncrementViews();
+                manager.OnIncrement?.Invoke();
             }
             yield return new WaitForSeconds(1);
             ClickBehavior.UpdateAllText();
         }
     }
 
-    private IEnumerator AutoIncrementFollowers()
+    private void UpdateManagerTexts(Manager manager)
     {
-        while (true)
-        {
-            for (int i = 0; i < followersIncrementValue; i++)
-            {
-                ClickBehavior.IncrementFollowers();
-            }
-            yield return new WaitForSeconds(1);
-            ClickBehavior.UpdateAllText();
-        }
-    }
-
-    private IEnumerator AutoIncrementCash()
-    {
-        while (true)
-        {
-            for (int i = 0; i < cashIncrementValue; i++)
-            {
-                ClickBehavior.IncrementCash();
-            }
-            yield return new WaitForSeconds(1);
-            ClickBehavior.UpdateAllText();
-        }
-    }
-
-    private void UpdateManagerTexts()
-    {
-        viewsManagerCostText.text = "$:" + viewsManagerCost.ToString();
-        viewsIncrementValueText.text = viewsIncrementValue.ToString() + " P/S";
-
-        followersManagerCostText.text = "$:" + followersManagerCost.ToString();
-        followersIncrementValueText.text = followersIncrementValue.ToString() + " P/S";
-
-        cashManagerCostText.text = "$:" + cashManagerCost.ToString();
-        cashIncrementValueText.text = cashIncrementValue.ToString() + " P/S";
+        manager.costText.text = "$:" + manager.cost.ToString();
+        manager.incrementValueText.text = manager.incrementValue.ToString() + " P/S";
     }
 
     private void CheckButtonInteractiblity()
     {
-        viewsManagerButton.interactable = ClickBehavior.GetCash() >= viewsManagerCost;
-        followersManagerButton.interactable = ClickBehavior.GetCash() >= followersManagerCost;
-        cashManagerButton.interactable = ClickBehavior.GetCash() >= cashManagerCost;
-    }
-
-    public void PopupMenu()
-    {
-        managersMenu.SetActive(!managersMenu.activeSelf);
+        foreach (Manager manager in managers)
+        {
+            manager.purchaseButton.interactable = ClickBehavior.GetCash() >= manager.cost;
+        }
     }
 }
