@@ -15,6 +15,8 @@ public class Manager
     public Button purchaseButton;
     [HideInInspector]
     public bool isActive = false;
+    [HideInInspector]
+    public int currentTier = 0; // Add a tier to each manager.
     public delegate void IncrementAction();
     [HideInInspector]
     public IncrementAction OnIncrement;
@@ -53,6 +55,9 @@ public class Managers : MonoBehaviour
 
             manager.cost *= 2;
             manager.incrementValue *= 2;
+
+            manager.currentTier++; // Increment the manager's tier whenever it's purchased.
+
             UpdateManagerTexts(manager);
         }
     }
