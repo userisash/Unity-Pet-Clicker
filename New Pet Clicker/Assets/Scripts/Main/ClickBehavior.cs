@@ -3,9 +3,9 @@ using TMPro;
 
 public class ClickBehavior : MonoBehaviour
 {
-    private int views = 0;
-    private int followers = 0;
-    private int cash = 10;
+    public int views = 0;
+    public int followers = 0;
+    public int cash = 0;
     public int coins = 0;
 
 
@@ -28,9 +28,9 @@ public class ClickBehavior : MonoBehaviour
 
         if (randomChance == 9) // you can choose any number between 1 and 150, I chose 75 as an example.
         {
-            //views += 500;
-            //followers += 300;
-            //cash += 100;
+            views += 500;
+            followers += 300;
+            cash += 1000;
         }
         else
         {
