@@ -2220,8 +2220,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 13, y: -151.09995}
-  m_SizeDelta: {x: 40.581, y: 32.7029}
+  m_AnchoredPosition: {x: 56.41509, y: 27.994}
+  m_SizeDelta: {x: 652.297, y: 405.99}
   m_Pivot: {x: 0.50000113, y: 0.49999985}
 --- !u!114 &348049605
 MonoBehaviour:
@@ -2292,7 +2292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4648,6 +4648,8 @@ MonoBehaviour:
   followers: 0
   cash: 0
   coins: 0
+  flyingNumberPrefab: {fileID: 3781814238251703473, guid: 656bc9bbad9b6e7469a70770fd1850e2, type: 3}
+  uiCanvasTransform: {fileID: 557999093}
   viewsText: {fileID: 324209704}
   followersText: {fileID: 447725545}
   cashText: {fileID: 1774100959}
@@ -10393,8 +10395,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056039484}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -400.0149, y: -225.02228, z: 0}
-  m_LocalScale: {x: 0.38970816, y: 0.38743156, z: 0.058448248}
+  m_LocalPosition: {x: -400.0918, y: -225.1038, z: 0}
+  m_LocalScale: {x: 0.7152322, y: 0.70394415, z: 0.106197596}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 53984613}
