@@ -7,15 +7,14 @@ public class Business
 {
     public string businessName;
     public Sprite businessImage;
-    public int rewardAmount;
-    public float fillTime;
-    [HideInInspector]
-    public float currentFillAmount = 0;
+    public int cashReward;
+    public float fillDuration;
 
-    // UI elements
-    public GameObject businessUI; // The GameObject containing all the business's UI elements.
-    public Image imageComponent;
-    public TextMeshProUGUI titleComponent;
-    public Slider progressBarComponent;
-    public Button businessButton;
+    // UI Elements
+    public TMPro.TextMeshProUGUI nameText;
+    public Image businessImg;
+    public Button startBusinessButton;
+    public Slider progressBar;
 }
+
+
