@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
+using UnityEngine.UI; 
 
 public class ClickBehavior : MonoBehaviour
 {
@@ -8,7 +10,8 @@ public class ClickBehavior : MonoBehaviour
     public int cash = 0;
     public int coins = 0;
 
-
+    public GameObject flyingNumberPrefab; // Drag your created prefab here
+    public Transform uiCanvasTransform;   // Drag your canvas or a panel inside the canvas here
     public TextMeshProUGUI viewsText;
     public TextMeshProUGUI followersText;
     public TextMeshProUGUI cashText;
@@ -17,6 +20,7 @@ public class ClickBehavior : MonoBehaviour
     private int viewsPerClick = 1;
     private int followersPerClick = 1; // for future upgrades
     private int cashPerClick = 1;      // for future upgrades
+    private bool hasReachedGoal = false;
 
     private int lastAwardedFollowersAtViews = 0;
     private int lastAwardedCashAtFollowers = 0;
@@ -39,11 +43,12 @@ public class ClickBehavior : MonoBehaviour
 
         UpdateAllText();
     }
-
+    
 
     public void IncrementViews()
     {
         views += viewsPerClick;
+        ShowFlyingNumberEffect(viewsPerClick);
 
         // Check if followers should be incremented
         CheckCounters();
@@ -59,10 +64,9 @@ public class ClickBehavior : MonoBehaviour
 
     public void IncrementCash()
     {
-        cash += cashPerClick;
-        if(cash % 10 == 0)
+        if (hasReachedGoal)
         {
-            AddCoins(1);
+            cash += cashPerClick;
         }
     }
 
@@ -74,6 +78,10 @@ public class ClickBehavior : MonoBehaviour
 
     public void CheckCounters()
     {
+        if(followers >= 1000)
+        {
+            hasReachedGoal = true;
+        }
         int maxIterations = 10; // for safety
 
         int iterations = 0;
@@ -91,6 +99,35 @@ public class ClickBehavior : MonoBehaviour
             IncrementCash();
             iterations++;
         }
+    }
+
+    public void ShowFlyingNumberEffect(int incrementValue)
+    {
+        // Instantiate the number
+        Vector3 mousePos = Input.mousePosition;
+        GameObject numberInstance = Instantiate(flyingNumberPrefab, mousePos, Quaternion.identity, uiCanvasTransform);
+        TextMeshProUGUI numberText = numberInstance.GetComponent<TextMeshProUGUI>();
+        numberText.text = $"+{incrementValue}";
+
+       
+
+        // Start the move animation
+        StartCoroutine(MoveNumberToTarget(numberInstance.transform, viewsText.transform.position, 2f));
+    }
+
+    IEnumerator MoveNumberToTarget(Transform numberTransform, Vector3 targetPosition, float duration)
+    {
+        float elapsed = 0f;
+        Vector3 startingPosition = numberTransform.position;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            numberTransform.position = Vector3.Lerp(startingPosition, targetPosition, elapsed / duration);
+            yield return null;
+        }
+
+        Destroy(numberTransform.gameObject);
     }
 
 
