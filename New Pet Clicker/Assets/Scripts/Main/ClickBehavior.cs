@@ -32,9 +32,9 @@ public class ClickBehavior : MonoBehaviour
 
         if (randomChance == 9) // you can choose any number between 1 and 150, I chose 75 as an example.
         {
-            views += 500;
-            followers += 300;
-            cash += 1000;
+            views += 100;
+            followers += 50;
+            cash += 10;
         }
         else
         {
