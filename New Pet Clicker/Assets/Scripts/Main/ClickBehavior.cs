@@ -20,6 +20,7 @@ public class ClickBehavior : MonoBehaviour
     private int viewsPerClick = 1;
     private int followersPerClick = 1; // for future upgrades
     private int cashPerClick = 1;      // for future upgrades
+    private bool hasReachedGoal = false;
 
     private int lastAwardedFollowersAtViews = 0;
     private int lastAwardedCashAtFollowers = 0;
@@ -42,7 +43,7 @@ public class ClickBehavior : MonoBehaviour
 
         UpdateAllText();
     }
-
+    
 
     public void IncrementViews()
     {
@@ -63,10 +64,9 @@ public class ClickBehavior : MonoBehaviour
 
     public void IncrementCash()
     {
-        cash += cashPerClick;
-        if(cash % 10 == 0)
+        if (hasReachedGoal)
         {
-            AddCoins(1);
+            cash += cashPerClick;
         }
     }
 
@@ -78,6 +78,10 @@ public class ClickBehavior : MonoBehaviour
 
     public void CheckCounters()
     {
+        if(followers >= 1000)
+        {
+            hasReachedGoal = true;
+        }
         int maxIterations = 10; // for safety
 
         int iterations = 0;
