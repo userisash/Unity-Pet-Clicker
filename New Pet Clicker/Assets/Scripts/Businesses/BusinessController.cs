@@ -5,9 +5,10 @@ using TMPro;
 
 public class BusinessController : MonoBehaviour
 {
-    private Business business;
+    public Business business;
     private ClickBehavior clickBehavior;
     private bool isRunning;
+    private float timePassed = 0;
 
     public void Initialize(Business newBusiness, ClickBehavior clickBehaviorReference)
     {
@@ -19,32 +20,35 @@ public class BusinessController : MonoBehaviour
         business.businessImg.sprite = business.businessImage;
 
         business.startBusinessButton.onClick.AddListener(StartBusiness);
+
+        // Register with BusinessManager
+        WorkManager.Instance.RegisterBusiness(this);
     }
 
     public void StartBusiness()
     {
         if (!isRunning)
         {
-            StartCoroutine(RunBusiness());
+            isRunning = true;
+            timePassed = 0;
         }
     }
 
-    private IEnumerator RunBusiness()
+    public void UpdateBusiness()
     {
-        isRunning = true;
-
-        float timePassed = 0;
-        while (timePassed < business.fillDuration)
+        if (isRunning)
         {
-            business.progressBar.value = timePassed / business.fillDuration;
             timePassed += Time.deltaTime;
-            yield return null;
+
+            business.progressBar.value = timePassed / business.fillDuration;
+
+            if (timePassed >= business.fillDuration)
+            {
+                clickBehavior.AddCash(business.cashReward);
+                business.progressBar.value = 0;
+                isRunning = false;
+            }
         }
-
-        clickBehavior.AddCash(business.cashReward);
-
-        business.progressBar.value = 0;
-        isRunning = false;
     }
 }
 
