@@ -5280,6 +5280,7 @@ RectTransform:
   - {fileID: 1317605681}
   - {fileID: 1245992834}
   - {fileID: 1150774644}
+  - {fileID: 800200417}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6132,6 +6133,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45917500a4ba224c8aca025a6157ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &800200415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 800200417}
+  - component: {fileID: 800200416}
+  m_Layer: 0
+  m_Name: SelectedPetContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &800200416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800200415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 167707c78b447a944a69736f81dfb75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  catPrefab: {fileID: -8653719598885068355, guid: 1e84084cb8d8a884492efbd62f1d1146, type: 3}
+  dogPrefab: {fileID: 4055792437294699989, guid: b7669a0333b979b42a090bae607e2203, type: 3}
+  rabbitPrefab: {fileID: 6251042830508634944, guid: f54d5520239f2254f91a41542922233c, type: 3}
+  hamsterPrefab: {fileID: 8511840650921148164, guid: 64e678c130806bc4091f8975472c39e8, type: 3}
+  petContainer: {fileID: 800200417}
+--- !u!4 &800200417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800200415}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0139418, y: 1.0139418, z: 1.0139418}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 557999093}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &857471011
 GameObject:
   m_ObjectHideFlags: 0
