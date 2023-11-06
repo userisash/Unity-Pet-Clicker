@@ -5,7 +5,9 @@ using TMPro;
 public class DonationsFeatureController : MonoBehaviour
 {
     public ClickBehavior clickBehavior;
-    public TextMeshProUGUI donationsFeatureText;
+    public NotificationManager notificationManager;
+
+    //public TextMeshProUGUI donationsFeatureText;
 
     private bool isDonationsFeatureUnlocked = false;
 
@@ -21,7 +23,7 @@ public class DonationsFeatureController : MonoBehaviour
     private void UnlockDonationsFeature()
     {
         isDonationsFeatureUnlocked = true;
-        donationsFeatureText.text = "Donations Unlocked!";
+        notificationManager.AddNotification("Donations Feature is now unlocked!");
     }
 
     public void TryGenerateDonation()

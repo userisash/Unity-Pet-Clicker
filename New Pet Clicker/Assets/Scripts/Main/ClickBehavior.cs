@@ -11,6 +11,7 @@ public class ClickBehavior : MonoBehaviour
     public int coins = 0;
 
     public DonationsFeatureController donationsFeatureController;
+    public NotificationManager notificationManager;
 
     public GameObject flyingNumberPrefab; // Drag your created prefab here
     public Transform uiCanvasTransform;   // Drag your canvas or a panel inside the canvas here
@@ -72,10 +73,10 @@ public class ClickBehavior : MonoBehaviour
 
     public void IncrementCash()
     {
-        if (hasReachedGoal)
-        {
-            cash += cashPerClick;
-        }
+        //if (hasReachedGoal)
+        //{
+        //    cash += cashPerClick;
+        //}
     }
 
     public void AddCoins(int amount)
@@ -89,6 +90,7 @@ public class ClickBehavior : MonoBehaviour
         if(followers >= 1000)
         {
             hasReachedGoal = true;
+            notificationManager.AddNotification("Goal reached! Followers: 1000");
         }
         int maxIterations = 10; // for safety
 
@@ -139,7 +141,7 @@ public class ClickBehavior : MonoBehaviour
         viewsText.text = views.ToString();
         followersText.text = followers.ToString();
         cashText.text = cash.ToString();
-        coinsText.text = "Coins: " + coins;
+        //coinsText.text = "Coins: " + coins;
     }
 
     public void AddToClickValues(int viewsIncrement, int followersIncrement, int cashIncrement)
