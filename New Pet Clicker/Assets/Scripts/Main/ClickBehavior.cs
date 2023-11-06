@@ -10,6 +10,8 @@ public class ClickBehavior : MonoBehaviour
     public int cash = 0;
     public int coins = 0;
 
+    public DonationsFeatureController donationsFeatureController;
+
     public GameObject flyingNumberPrefab; // Drag your created prefab here
     public Transform uiCanvasTransform;   // Drag your canvas or a panel inside the canvas here
     public TextMeshProUGUI viewsText;
@@ -28,13 +30,12 @@ public class ClickBehavior : MonoBehaviour
 
     public void OnButtonClick()
     {
-        int randomChance = Random.Range(1, 10); // generates a random number between 1 and 150 inclusive.
+        int randomChance = Random.Range(1, 1000); // generates a random number between 1 and 150 inclusive.
 
-        if (randomChance == 9) // you can choose any number between 1 and 150, I chose 75 as an example.
+        if (randomChance == 90) // you can choose any number between 1 and 150, I chose 75 as an example.
         {
-            views += 100;
-            followers += 50;
-            cash += 10;
+            //views += 1000;
+            //CheckCounters();
         }
         else
         {
@@ -56,11 +57,18 @@ public class ClickBehavior : MonoBehaviour
 
     public void IncrementFollowers()
     {
+        int previousFollowers = followers;
         followers += followersPerClick;
 
-        // Check if cash should be incremented
+        // If followers increased by at least 10, attempt to generate donation
+        if ((followers / 10) > (previousFollowers / 10))
+        {
+            donationsFeatureController.TryGenerateDonation();
+        }
+
         CheckCounters();
     }
+
 
     public void IncrementCash()
     {
@@ -92,13 +100,7 @@ public class ClickBehavior : MonoBehaviour
             iterations++;
         }
 
-        iterations = 0;
-        while ((followers - lastAwardedCashAtFollowers) >= 10 && iterations < maxIterations)
-        {
-            lastAwardedCashAtFollowers += 10;
-            IncrementCash();
-            iterations++;
-        }
+      
     }
 
     public void ShowFlyingNumberEffect(int incrementValue)
