@@ -77,8 +77,8 @@ public class Managers : MonoBehaviour
 
     private void UpdateManagerTexts(Manager manager)
     {
-        manager.costText.text = "$:" + manager.cost.ToString();
-        manager.incrementValueText.text = manager.incrementValue.ToString() + " P/S";
+        manager.costText.text = "$:" + ClickBehavior.FormatNumber(manager.cost);
+        manager.incrementValueText.text = ClickBehavior.FormatNumber(manager.incrementValue) + " P/S";
     }
 
     private void CheckButtonInteractiblity()

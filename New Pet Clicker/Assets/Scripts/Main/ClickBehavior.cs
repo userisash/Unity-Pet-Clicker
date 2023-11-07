@@ -138,10 +138,9 @@ public class ClickBehavior : MonoBehaviour
 
     public void UpdateAllText()
     {
-        viewsText.text = views.ToString();
-        followersText.text = followers.ToString();
-        cashText.text = cash.ToString();
-        //coinsText.text = "Coins: " + coins;
+        viewsText.text = FormatNumber(views);
+        followersText.text = FormatNumber(followers);
+        cashText.text = FormatNumber(cash);
     }
 
     public void AddToClickValues(int viewsIncrement, int followersIncrement, int cashIncrement)
@@ -160,5 +159,29 @@ public class ClickBehavior : MonoBehaviour
     {
         cash += amount;
         UpdateAllText();
+    }
+
+    public string FormatNumber(double number)
+    {
+        if (number < 1000)
+        {
+            return number.ToString("0");
+        }
+        else if (number < 1000000)
+        {
+            return (number / 1000).ToString("0.#") + "K";
+        }
+        else if (number < 1000000000)
+        {
+            return (number / 1000000).ToString("0.#") + "M";
+        }
+        else if (number < 1000000000000)
+        {
+            return (number / 1000000000).ToString("0.#") + "B";
+        }
+        else
+        {
+            return (number / 1000000000000).ToString("0.#") + "T";
+        }
     }
 }
