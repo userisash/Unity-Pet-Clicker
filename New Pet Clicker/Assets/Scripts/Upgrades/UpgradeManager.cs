@@ -6,6 +6,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Tier
 {
+    public ClickBehavior ClickBehavior;
+
     public string Name; // Name of the tier for easy identification
     public TextMeshProUGUI CostText;
     public TextMeshProUGUI IncrementText;
@@ -32,7 +34,7 @@ public class Tier
     // Update the UI elements for this tier
     public void UpdateTexts()
     {
-        CostText.text = "$: " + Cost.ToString();
+        CostText.text = "$: " + ClickBehavior.FormatNumber(Cost);
         IncrementText.text = GetIncrementDescription();
     }
 

@@ -55,6 +55,7 @@ public class NotificationManager : MonoBehaviour
 
     public void AddNotification(string message)
     {
+        Debug.Log($"Adding notification: {message}");
         if (message != lastNotification)
         {
             notificationsQueue.Clear(); // Clear the queue to prioritize the new message
