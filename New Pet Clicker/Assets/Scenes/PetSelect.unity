@@ -380,7 +380,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -32.606}
-  m_SizeDelta: {x: 347.8007, y: 65.2126}
+  m_SizeDelta: {x: 347.8007, y: 65.212}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &527930387
 MonoBehaviour:
@@ -426,9 +426,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 957267513}
+      - m_Target: {fileID: 957267509}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ConfirmPetSelection
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -754,7 +754,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 957267512}
+      - m_Target: {fileID: 1794966334}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
         m_MethodName: LoadSceneByName
         m_Mode: 5
@@ -813,7 +813,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 957267511}
-  - component: {fileID: 957267512}
   - component: {fileID: 957267513}
   m_Layer: 0
   m_Name: SceneManager
@@ -837,18 +836,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &957267512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957267509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d3df87129bae164ca6d41795e30c44f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &957267513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,6 +848,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb87d6ae7697ad4c9ac6dd4b99f6f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petInventory: {fileID: 11400000, guid: a71a3da9306a7074b999cc496869d2cf, type: 2}
+  currentPetInstance: {fileID: 0}
   petSpawnLocation: {fileID: 0}
 --- !u!1 &972255997
 GameObject:
@@ -1132,6 +1121,50 @@ MonoBehaviour:
   selectedPetDisplay: {fileID: 1069922078}
   confirmSelectionButton: {fileID: 527930387}
   petInventory: {fileID: 11400000, guid: a71a3da9306a7074b999cc496869d2cf, type: 2}
+--- !u!1 &1794966332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1794966333}
+  - component: {fileID: 1794966334}
+  m_Layer: 0
+  m_Name: sceneloader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1794966333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794966332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 752.469, y: 325.4867, z: 24.74611}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1794966334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794966332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3df87129bae164ca6d41795e30c44f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2013269452
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,7 +26,6 @@ public class ClickBehavior : MonoBehaviour
     private bool hasReachedGoal = false;
 
     private int lastAwardedFollowersAtViews = 0;
-    private int lastAwardedCashAtFollowers = 0;
 
 
     public void OnButtonClick()

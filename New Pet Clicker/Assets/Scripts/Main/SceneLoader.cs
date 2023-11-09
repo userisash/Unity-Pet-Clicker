@@ -13,5 +13,6 @@ public class SceneLoader : MonoBehaviour
     public void LoadSceneByIndex(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
+        Debug.Log("reloading scene");
     }
 }
