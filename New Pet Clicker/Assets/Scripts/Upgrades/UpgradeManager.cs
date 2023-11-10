@@ -12,10 +12,12 @@ public class Tier
     public TextMeshProUGUI CostText;
     public TextMeshProUGUI IncrementText;
     public Button PurchaseButton;
+
     public int Cost;
     public int ViewsIncrement;
     public int FollowersIncrement;
     public int CashIncrement;
+ 
 
     // Method to purchase this tier's upgrade
     public bool PurchaseUpgrade(ClickBehavior clickBehavior)

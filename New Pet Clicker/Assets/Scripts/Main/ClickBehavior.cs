@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class ClickBehavior : MonoBehaviour
 {
     public int views = 0;
+    public int monthlyViews = 0;
+    public int allTimeViews = 0;
     public int followers = 0;
     public int cash = 0;
     public int coins = 0;
@@ -15,7 +17,10 @@ public class ClickBehavior : MonoBehaviour
 
     public GameObject flyingNumberPrefab; // Drag your created prefab here
     public Transform uiCanvasTransform;   // Drag your canvas or a panel inside the canvas here
+
     public TextMeshProUGUI viewsText;
+    public TextMeshProUGUI monthlyViewsText;
+    public TextMeshProUGUI allTimeViewsText;
     public TextMeshProUGUI followersText;
     public TextMeshProUGUI cashText;
     public TextMeshProUGUI coinsText;
@@ -40,6 +45,7 @@ public class ClickBehavior : MonoBehaviour
         else
         {
             IncrementViews();
+            ShowFlyingNumberEffect(viewsPerClick);
         }
 
         UpdateAllText();
@@ -49,7 +55,7 @@ public class ClickBehavior : MonoBehaviour
     public void IncrementViews()
     {
         views += viewsPerClick;
-        ShowFlyingNumberEffect(viewsPerClick);
+      
 
         // Check if followers should be incremented
         CheckCounters();
@@ -140,6 +146,8 @@ public class ClickBehavior : MonoBehaviour
         viewsText.text = FormatNumber(views);
         followersText.text = FormatNumber(followers);
         cashText.text = FormatNumber(cash);
+        monthlyViewsText.text = FormatNumber(monthlyViews);
+        allTimeViewsText.text = FormatNumber(allTimeViews);
     }
 
     public void AddToClickValues(int viewsIncrement, int followersIncrement, int cashIncrement)
@@ -160,6 +168,13 @@ public class ClickBehavior : MonoBehaviour
         UpdateAllText();
     }
 
+    public void ResetAndUpdateViews()
+    {
+        allTimeViews += views; // Add current views to allTimeViews
+        monthlyViews = views; // Set monthlyViews to the current views before reset
+        views = 0; // Reset views
+        UpdateAllText(); // Update UI
+    }
     public string FormatNumber(double number)
     {
         if (number < 1000)

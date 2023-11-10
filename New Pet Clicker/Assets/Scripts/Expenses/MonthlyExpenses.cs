@@ -11,7 +11,7 @@ public class MonthlyExpenses : MonoBehaviour
     public int baseManagerCost = 50; // Base cost for a manager
     public float managerTierMultiplier = 1.5f; // Multiplier to increase manager cost with each tier
 
-    private float timeToDeduct = 300f; // Time in seconds (5 minutes = 300 seconds by default).
+    public float timeToDeduct = 300f; // Time in seconds (5 minutes = 300 seconds by default).
 
     public Slider timeSlider;
     public GameObject expensesPopup; // The entire popup
@@ -33,8 +33,9 @@ public class MonthlyExpenses : MonoBehaviour
 
         if (currentTime <= 0)
         {
-            DeductExpenses();
             currentTime = timeToDeduct; // Reset the timer
+            DeductExpenses();
+            ResetViewsCounter();
             UpdateUpcomingExpensesUI(); // Update the UI after deducting expenses
         }
 
@@ -62,6 +63,13 @@ public class MonthlyExpenses : MonoBehaviour
         UpdateCurrentCashUI(); // Update current cash UI after deduction
     }
 
+    private void ResetViewsCounter()
+    {
+        // Reset views and update allTimeViews and monthlyViews in ClickBehavior
+        ClickBehavior.ResetAndUpdateViews();
+
+        // Any additional logic related to views reset can be added here
+    }
     private int CalculateUpcomingExpenses()
     {
         int totalManagerCost = 0;
