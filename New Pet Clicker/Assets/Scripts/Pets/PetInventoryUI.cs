@@ -1,27 +1,37 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PetInventoryUI : MonoBehaviour
 {
     public GameObject petItemPrefab;
     public Transform inventoryContainer;
     public Image selectedPetDisplay;
-    public Button confirmSelectionButton; // Reference to the confirm selection button
+    public Button confirmSelectionButton; // Reference to the confirm selection button in the UI
     public PetInventory petInventory; // Your scriptable object or another form of storage for owned pets.
 
-    private Pet selectedPet; // Temporarily store the selected pet here
+    private Pet currentlySelectedPet; // Temporarily store the selected pet here
 
     private void Start()
     {
         PopulateInventory();
         confirmSelectionButton.onClick.AddListener(ConfirmSelection); // Add a listener to the confirm button
         confirmSelectionButton.interactable = false; // Start with the confirm button disabled
+        string selectedPetName = PlayerPrefs.GetString("SelectedPet", "");
+        Pet petToSelect = selectedPetName != "" ? FindPetByName(selectedPetName) : null;
+        SelectPet(petToSelect ?? petInventory.ownedPets[0]);
+    }
 
-        // Optionally select a default pet at start.
-        if (petInventory.ownedPets.Count > 0)
+    private Pet FindPetByName(string petName)
+    {
+        foreach (var pet in petInventory.ownedPets)
         {
-            SelectPet(petInventory.ownedPets[0]);
+            if (pet.petName == petName)
+            {
+                return pet;
+            }
         }
+        return null; // Pet not found
     }
 
     void PopulateInventory()
@@ -30,7 +40,6 @@ public class PetInventoryUI : MonoBehaviour
         {
             GameObject item = Instantiate(petItemPrefab, inventoryContainer);
             item.GetComponent<Image>().sprite = pet.petSprite;
-            // Use a lambda expression to pass the pet to the SelectPet function.
             item.GetComponent<Button>().onClick.AddListener(() => SelectPet(pet));
         }
     }
@@ -38,17 +47,16 @@ public class PetInventoryUI : MonoBehaviour
     void SelectPet(Pet pet)
     {
         selectedPetDisplay.sprite = pet.petSprite;
-        selectedPet = pet; // Store the selected pet
+        currentlySelectedPet = pet; // Temporarily store the selected pet
         confirmSelectionButton.interactable = true; // Enable the confirm button
     }
 
-    public void ConfirmSelection()
+    void ConfirmSelection()
     {
-        if (selectedPet != null)
+        if (currentlySelectedPet != null)
         {
-            GameManager.Instance.SetSelectedPet(selectedPet); // Set the pet in the GameManager when confirmed
-            // Optionally, switch to the main scene after confirming the selection
-            // SceneManager.LoadScene("MainScene");
+            GameManager.Instance.SetSelectedPet(currentlySelectedPet); // Confirm the selection in the GameManager
+            SceneManager.LoadScene("MainScene"); // Load the main game scene
         }
     }
 }

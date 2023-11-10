@@ -5,10 +5,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public PetInventory petInventory;
+    [SerializeField]
     private GameObject currentPetInstance;
-    public Transform petSpawnLocation; // You need to set this reference in the main scene
+    [SerializeField]
+    private Transform petSpawnLocation; // Assign this to the transform where pets should appear
+
+    private string selectedPetKey = "SelectedPet";
     private Pet selectedPet;
-    private bool petConfirmed = false; // Add a flag to check if the pet selection has been confirmed
 
     private void Awake()
     {
@@ -18,44 +22,62 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
-        else
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
     }
 
+    private void Start()
+    {
+        LoadSelectedPet();
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // You can use the scene name or build index to check if it's the main game scene
-        if (scene.name == "MainScene" && petConfirmed) // Check if the pet has been confirmed
+        petSpawnLocation = GameObject.FindWithTag("PetSpawnLocationTag").transform; // Find the petSpawnLocation by tag
+
+        if (selectedPet != null && scene.name == "MainScene") // Replace "MainScene" with your main scene's name
         {
-            // Find the petSpawnLocation in the current scene
-            petSpawnLocation = GameObject.FindWithTag("PetSpawnLocationTag").transform;
-            SpawnSelectedPet();
+            InstantiateSelectedPet();
         }
     }
 
     public void SetSelectedPet(Pet newSelectedPet)
     {
         selectedPet = newSelectedPet;
+
+        // Save the selected pet's name to PlayerPrefs
+        PlayerPrefs.SetString(selectedPetKey, selectedPet.petName);
+        PlayerPrefs.Save();
     }
 
-    // Call this method from your UI button to confirm the selection of the pet
-    public void ConfirmPetSelection()
+    private void LoadSelectedPet()
     {
-        petConfirmed = true;
-        if (SceneManager.GetActiveScene().name == "MainScene")
+        string petName = PlayerPrefs.GetString(selectedPetKey, "");
+        selectedPet = !string.IsNullOrEmpty(petName) ? FindPetByName(petName) : null;
+
+        if (selectedPet != null)
         {
-            SpawnSelectedPet();
-        }
-        else
-        {
-            // Load the Main Scene if not already there
-            SceneManager.LoadScene("MainScene");
+            InstantiateSelectedPet();
         }
     }
 
-    private void SpawnSelectedPet()
+    private Pet FindPetByName(string petName)
+    {
+        foreach (var pet in petInventory.ownedPets)
+        {
+            if (pet.petName == petName)
+            {
+                return pet;
+            }
+        }
+
+        // If we reach this point, no pet with the given name was found.
+        return null;
+    }
+
+    private void InstantiateSelectedPet()
     {
         // If there's already a pet in the scene, destroy it
         if (currentPetInstance != null)
@@ -64,15 +86,12 @@ public class GameManager : MonoBehaviour
         }
 
         // Instantiate the new pet at the petSpawnLocation
-        if (petSpawnLocation != null && selectedPet != null)
-        {
-            currentPetInstance = Instantiate(selectedPet.petPrefab, petSpawnLocation.position, Quaternion.identity);
+        currentPetInstance = Instantiate(selectedPet.petPrefab, petSpawnLocation.position, Quaternion.identity);
 
-            // Optionally parent it to the spawn location (if you want to maintain a clean hierarchy)
-            currentPetInstance.transform.SetParent(petSpawnLocation);
+        // Optionally parent it to the spawn location (if you want to maintain a clean hierarchy)
+        currentPetInstance.transform.SetParent(petSpawnLocation, false);
 
-            // If the pet has any default animations, they should automatically play if the Animator component is set up correctly.
-        }
+        // If the pet has any default animations, they should automatically play if the Animator component is set up correctly.
     }
 
     private void OnDestroy()
@@ -80,4 +99,3 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }
-

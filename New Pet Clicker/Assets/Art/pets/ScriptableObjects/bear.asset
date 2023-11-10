@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4fa1810db6704e469de60a4adea6d89, type: 3}
-  m_Name: PetInventory
+  m_Script: {fileID: 11500000, guid: 711d345531a7d114eb0964395b48557f, type: 3}
+  m_Name: bear
   m_EditorClassIdentifier: 
-  ownedPets:
-  - {fileID: 11400000, guid: 0cf32997d3fd81443a1fb9e0f7a8c1a3, type: 2}
-  - {fileID: 11400000, guid: 0278f4412a2f0174fbe32d2c1f031bd5, type: 2}
+  petName: bearMan
+  petSprite: {fileID: 21300000, guid: c9dabb94e5b374a4d8f26d5f3cf5b864, type: 3}
+  petPrefab: {fileID: -8653719598885068355, guid: 13bc47634913ff1429b6ba3370a1abdb, type: 3}
