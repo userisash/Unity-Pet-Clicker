@@ -14,6 +14,8 @@ public class ClickBehavior : MonoBehaviour
 
     public DonationsFeatureController donationsFeatureController;
     public NotificationManager notificationManager;
+    public SponsorshipManager sponsorshipManager; // Assign in the inspector
+
 
     public GameObject flyingNumberPrefab; // Drag your created prefab here
     public Transform uiCanvasTransform;   // Drag your canvas or a panel inside the canvas here
@@ -72,6 +74,7 @@ public class ClickBehavior : MonoBehaviour
             donationsFeatureController.TryGenerateDonation();
         }
 
+        sponsorshipManager.CheckAndUnlockSponsorship();
         CheckCounters();
     }
 
@@ -107,7 +110,8 @@ public class ClickBehavior : MonoBehaviour
             iterations++;
         }
 
-      
+       
+
     }
 
     public void ShowFlyingNumberEffect(int incrementValue)
