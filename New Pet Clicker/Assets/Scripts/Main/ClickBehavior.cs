@@ -28,7 +28,7 @@ public class ClickBehavior : MonoBehaviour
     public TextMeshProUGUI cashText;
     public TextMeshProUGUI coinsText;
 
-    private int viewsPerClick = 1;
+    private int viewsPerClick = 1000;
     private int followersPerClick = 1; // for future upgrades
     private int cashPerClick = 1;      // for future upgrades
     private bool hasReachedGoal = false;
@@ -139,7 +139,7 @@ public class ClickBehavior : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         GameObject numberInstance = Instantiate(flyingNumberPrefab, mousePos, Quaternion.identity, uiCanvasTransform);
         TextMeshProUGUI numberText = numberInstance.GetComponent<TextMeshProUGUI>();
-        numberText.text = $"+{incrementValue}";
+        numberText.text =  $"+{FormatNumber(incrementValue)}";
 
        
 
