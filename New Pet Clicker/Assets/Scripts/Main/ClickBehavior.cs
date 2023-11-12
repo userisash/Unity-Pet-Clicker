@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ClickBehavior : MonoBehaviour
 {
+    public NumbersManager numbersManager;
     public int views = 0;
     public int monthlyViews = 0;
     public int allTimeViews = 0;
@@ -34,7 +35,20 @@ public class ClickBehavior : MonoBehaviour
 
     private int lastAwardedFollowersAtViews = 0;
 
+    void Start()
+    {
 
+        // Initialize with data from NumbersManager
+        if (NumbersManager.Instance != null)
+        {
+            views = NumbersManager.Instance.GetViews();
+            followers = NumbersManager.Instance.GetFollowers();
+            monthlyViews = NumbersManager.Instance.GetMonthlyViews();
+            allTimeViews = NumbersManager.Instance.GetAllTimeViews();
+            cash = NumbersManager.Instance.GetCash();
+            coins = NumbersManager.Instance.GetCash();
+        }
+    }
     public void OnButtonClick()
     {
         int randomChance = Random.Range(1, 1000); // generates a random number between 1 and 150 inclusive.
@@ -46,8 +60,10 @@ public class ClickBehavior : MonoBehaviour
         }
         else
         {
+
             IncrementViews();
             ShowFlyingNumberEffect(viewsPerClick);
+            
         }
 
         UpdateAllText();
@@ -57,7 +73,8 @@ public class ClickBehavior : MonoBehaviour
     public void IncrementViews()
     {
         views += viewsPerClick;
-      
+        NumbersManager.Instance.UpdateViews(views);
+
 
         // Check if followers should be incremented
         CheckCounters();
@@ -67,7 +84,7 @@ public class ClickBehavior : MonoBehaviour
     {
         int previousFollowers = followers;
         followers += followersPerClick;
-
+        NumbersManager.Instance.UpdateFollowers(followers);
         // If followers increased by at least 10, attempt to generate donation
         if ((followers / 10) > (previousFollowers / 10))
         {
@@ -85,11 +102,13 @@ public class ClickBehavior : MonoBehaviour
         //{
         //    cash += cashPerClick;
         //}
+        NumbersManager.Instance.UpdateCash(cash);
     }
 
     public void AddCoins(int amount)
     {
         coins += amount;
+        NumbersManager.Instance.UpdateCoins(coins);
         UpdateAllText();
     }
 
@@ -174,6 +193,7 @@ public class ClickBehavior : MonoBehaviour
 
     public void ResetAndUpdateViews()
     {
+        NumbersManager.Instance.UpdateAllTimeViews(allTimeViews);
         allTimeViews += views; // Add current views to allTimeViews
         monthlyViews = views; // Set monthlyViews to the current views before reset
         views = 0; // Reset views

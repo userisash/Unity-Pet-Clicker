@@ -2924,6 +2924,7 @@ GameObject:
   - component: {fileID: 274022761}
   - component: {fileID: 274022760}
   - component: {fileID: 274022763}
+  - component: {fileID: 274022764}
   m_Layer: 5
   m_Name: Upgrades
   m_TagString: Untagged
@@ -2941,7 +2942,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1177060859}
   m_Father: {fileID: 1245992834}
@@ -3050,6 +3051,27 @@ MonoBehaviour:
   normalSprite: {fileID: 21300000, guid: eddb7fc86e02487428ef28e105b6d6af, type: 3}
   clickSprite: {fileID: 21300000, guid: 518b985fda9d868469fa5d4218987ab6, type: 3}
   panelToToggle: {fileID: 1109820705}
+--- !u!95 &274022764
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274022758}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9e4f0c4a49b689847af856aa48015b35, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &295494031
 GameObject:
   m_ObjectHideFlags: 0
@@ -4778,6 +4800,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: SponsorshipManager, Assembly-CSharp
         m_MethodName: AcceptSponsorshipDeal
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1057310530}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7677,10 +7711,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd343db8ac1501488770d86f8c83c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersManager: {fileID: 1178466503}
   views: 0
   monthlyViews: 0
   allTimeViews: 0
-  followers: 9999
+  followers: 0
   cash: 0
   coins: 0
   donationsFeatureController: {fileID: 793234384}
@@ -11057,6 +11092,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177060858}
   m_CullTransparentMesh: 1
+--- !u!1 &1178466502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1178466504}
+  - component: {fileID: 1178466503}
+  m_Layer: 0
+  m_Name: Number Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1178466503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178466502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd1cdc07a1ab85498b85a6f8ce93497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1178466504
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178466502}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.946515, y: -1.9329286, z: 7.240798}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1182184252
 GameObject:
   m_ObjectHideFlags: 0

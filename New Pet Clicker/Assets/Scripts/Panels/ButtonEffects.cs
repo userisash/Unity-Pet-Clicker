@@ -11,11 +11,14 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private Image buttonImage;
     private Vector3 originalScale;
+    private Animator animator; // Reference to the Animator component
 
     // Start is called before the first frame update
     void Start()
     {
         buttonImage = GetComponent<Image>();
+        animator = GetComponent<Animator>(); // Get the Animator component
+
         if (buttonImage == null)
         {
             Debug.LogError("ButtonEffects requires an Image component on the same GameObject.");
@@ -23,6 +26,17 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
 
         originalScale = transform.localScale; // Remember the original scale
+
+        // Initialize Animator parameters
+        if (animator != null)
+        {
+            animator.SetBool("isUnclicked", true);
+            animator.SetBool("click", false);
+        }
+        else
+        {
+            Debug.LogError("ButtonEffects requires an Animator component on the same GameObject.");
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -38,11 +52,13 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerDown(PointerEventData eventData)
     {
         buttonImage.sprite = clickSprite; // Change the sprite
+        if (animator != null) animator.SetBool("click", true);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         buttonImage.sprite = normalSprite; // Change the sprite back to normal
+        if (animator != null) animator.SetBool("click", false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -51,6 +67,7 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (panelToToggle != null)
         {
             panelToToggle.SetActive(!panelToToggle.activeSelf);
+            if (animator != null) animator.SetBool("isUnclicked", !panelToToggle.activeSelf);
         }
         else
         {
