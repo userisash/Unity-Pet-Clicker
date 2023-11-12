@@ -139,7 +139,7 @@ public class ClickBehavior : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         GameObject numberInstance = Instantiate(flyingNumberPrefab, mousePos, Quaternion.identity, uiCanvasTransform);
         TextMeshProUGUI numberText = numberInstance.GetComponent<TextMeshProUGUI>();
-        numberText.text = $"+{incrementValue}";
+        numberText.text =  $"+{FormatNumber(incrementValue)}";
 
        
 
