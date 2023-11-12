@@ -31,16 +31,19 @@ public class SponsorshipManager : MonoBehaviour
 
     private void Update()
     {
-        // Increment the timer
-        sponsorshipTimer += Time.deltaTime;
-
-        // Check if it's time to present a new sponsorship offer
-        if (sponsorshipTimer >= SPONSORSHIP_INTERVAL)
+        if (sponsorshipUnlocked)
         {
-            PresentSponsorshipOffer();
-            sponsorshipTimer = 0f; // Reset the timer
-        }
+            // Increment the timer
+            sponsorshipTimer += Time.deltaTime;
 
+            // Check if it's time to present a new sponsorship offer
+            if (sponsorshipTimer >= SPONSORSHIP_INTERVAL)
+            {
+                PresentSponsorshipOffer();
+                // Reset timer to a random value within the range
+                sponsorshipTimer = Random.Range(MIN_SPONSORSHIP_INTERVAL, MAX_SPONSORSHIP_INTERVAL);
+            }
+        }
         // Update timers and handle deal expiration
         exclusiveDealActive = false;
         for (int i = activeDeals.Count - 1; i >= 0; i--)
@@ -82,29 +85,46 @@ public class SponsorshipManager : MonoBehaviour
     }
     private void DistributeCashFromActiveDeals()
     {
-        foreach (var deal in activeDeals)
+        for (int i = activeDeals.Count - 1; i >= 0; i--)
         {
-            cashAccumulator += CalculateCashDistribution(deal.CashAmount, deal.Duration);
-            if (cashAccumulator >= 1f) // Only distribute when at least 1 unit of cash is accumulated
-            {
-                int cashToDistribute = Mathf.FloorToInt(cashAccumulator);
-                Debug.Log($"Cash Accumulator: {cashAccumulator}");
+            var deal = activeDeals[i];
 
-                clickBehavior.AddCash(cashToDistribute);
-                totalCashFromSponsors += cashToDistribute;
-                cashAccumulator -= cashToDistribute;
+            // Check if a minute has passed since the last distribution and the deal is still active
+            if (deal.Duration - deal.Timer >= deal.LastDistributionTime + 60f && deal.Timer > 0f)
+            {
+                DistributeCashForDeal(deal);
             }
+
+            // Check if the deal has expired
+            if (deal.Timer <= 0f && deal.CashDistributed < deal.CashAmount)
+            {
+                // Distribute remaining cash if any
+                int remainingCash = deal.CashAmount - deal.CashDistributed;
+                if (remainingCash > 0)
+                {
+                    clickBehavior.AddCash(remainingCash);
+                    deal.CashDistributed += remainingCash;
+                }
+                activeDeals.RemoveAt(i); // Remove the expired deal
+            }
+
+            deal.Timer -= Time.deltaTime; // Update deal timer
         }
     }
 
-
-    private float CalculateCashDistribution(int totalCash, float duration)
+    private void DistributeCashForDeal(SponsorshipDeal deal)
     {
-        // Calculate cash per second
-        float cashPerSecond = (float)totalCash / duration;
+        int cashThisMinute = CalculateCashPerMinute(deal.CashAmount, deal.Duration);
+        int cashToDistribute = Mathf.Min(cashThisMinute, deal.CashAmount - deal.CashDistributed);
 
-        // Distribute cash for the current frame
-        return cashPerSecond * Time.deltaTime;
+        clickBehavior.AddCash(cashToDistribute);
+        deal.CashDistributed += cashToDistribute;
+        deal.LastDistributionTime = deal.Duration - deal.Timer;
+    }
+
+    private int CalculateCashPerMinute(int totalCash, float duration)
+    {
+        return Mathf.CeilToInt((float)totalCash / (duration / 60f));
     }
 
     public void ShowSponsorshipDeal(SponsorshipType type)
@@ -122,9 +142,11 @@ public class SponsorshipManager : MonoBehaviour
         return new SponsorshipDeal
         {
             Type = type,
-            Duration = 30f, // 5 minutes
+            Duration = 300f, // 5 minutes
             CashAmount = clickBehavior.followers / 100, // Example calculation
-            Timer = 30f
+            Timer = 300f,
+            CashDistributed = 0,
+            LastDistributionTime = 0
         };
     }
 
@@ -143,9 +165,29 @@ public class SponsorshipManager : MonoBehaviour
 
         var deal = GenerateNewDeal(currentDealType);
         activeDeals.Add(deal);
+
         // Hide the deal panel
-        var panel = currentDealType == SponsorshipType.Exclusive ? sponsorshipDealPanelType1 : sponsorshipDealPanelType2;
-        panel.SetActive(false);
+        CloseCurrentDealPanel();
+    }
+
+
+    public void RejectSponsorshipDeal()
+    {
+        // Hide the deal panel
+        CloseCurrentDealPanel();
+    }
+
+
+    private void CloseCurrentDealPanel()
+    {
+        if (currentDealType == SponsorshipType.Exclusive)
+        {
+            sponsorshipDealPanelType1.SetActive(false);
+        }
+        else
+        {
+            sponsorshipDealPanelType2.SetActive(false);
+        }
     }
 
 
