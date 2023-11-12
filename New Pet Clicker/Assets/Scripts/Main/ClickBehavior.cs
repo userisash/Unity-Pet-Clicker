@@ -28,7 +28,7 @@ public class ClickBehavior : MonoBehaviour
     public TextMeshProUGUI cashText;
     public TextMeshProUGUI coinsText;
 
-    private int viewsPerClick = 1;
+    private int viewsPerClick = 1000;
     private int followersPerClick = 1; // for future upgrades
     private int cashPerClick = 1;      // for future upgrades
     private bool hasReachedGoal = false;
