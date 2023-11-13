@@ -2,31 +2,23 @@ using UnityEngine;
 
 public class PanelManager : MonoBehaviour
 {
-    public GameObject[] panels; // Assign all panels here in the Inspector
     private GameObject currentlyOpenPanel = null;
 
-    public void OpenPanel(GameObject panelToOpen)
+    public void TogglePanel(GameObject panelToToggle)
     {
-        // If there's already an open panel, close it
-        if (currentlyOpenPanel != null && currentlyOpenPanel != panelToOpen)
+        if (currentlyOpenPanel != null)
         {
-            currentlyOpenPanel.SetActive(false);
+            currentlyOpenPanel.SetActive(false); // Close the currently open panel
         }
 
-        // Open the requested panel
-        panelToOpen.SetActive(true);
-
-        // Update the currently open panel
-        currentlyOpenPanel = panelToOpen;
-    }
-
-    // Optional: If you want a separate method to close panels
-    public void ClosePanel(GameObject panelToClose)
-    {
-        if (panelToClose == currentlyOpenPanel)
+        if (currentlyOpenPanel != panelToToggle)
         {
-            panelToClose.SetActive(false);
-            currentlyOpenPanel = null;
+            panelToToggle.SetActive(true); // Open the new panel
+            currentlyOpenPanel = panelToToggle; // Update the currently open panel
+        }
+        else
+        {
+            currentlyOpenPanel = null; // No panel is open
         }
     }
 }
