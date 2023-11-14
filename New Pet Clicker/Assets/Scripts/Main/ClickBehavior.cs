@@ -30,8 +30,7 @@ public class ClickBehavior : MonoBehaviour
 
     private int viewsPerClick = 1000;
     private int followersPerClick = 1; // for future upgrades
-    private int cashPerClick = 1;      // for future upgrades
-    private bool hasReachedGoal = false;
+
 
     private int lastAwardedFollowersAtViews = 0;
 
@@ -82,6 +81,7 @@ public class ClickBehavior : MonoBehaviour
 
     public void IncrementFollowers()
     {
+        Debug.Log("IncrementFollowers called");
         int previousFollowers = followers;
         followers += followersPerClick;
         NumbersManager.Instance.UpdateFollowers(followers);
@@ -91,17 +91,13 @@ public class ClickBehavior : MonoBehaviour
             donationsFeatureController.TryGenerateDonation();
         }
 
-        sponsorshipManager.CheckAndUnlockSponsorship();
+        //sponsorshipManager.CheckAndUnlockSponsorship();
         CheckCounters();
     }
 
 
     public void IncrementCash()
     {
-        //if (hasReachedGoal)
-        //{
-        //    cash += cashPerClick;
-        //}
         NumbersManager.Instance.UpdateCash(cash);
     }
 
@@ -116,7 +112,7 @@ public class ClickBehavior : MonoBehaviour
     {
         if(followers >= 1000)
         {
-            hasReachedGoal = true;
+            
             notificationManager.AddNotification("Goal reached! Followers: 1000");
         }
         int maxIterations = 10; // for safety
@@ -177,7 +173,6 @@ public class ClickBehavior : MonoBehaviour
     {
         viewsPerClick += viewsIncrement;
         followersPerClick += followersIncrement;
-        cashPerClick += cashIncrement;
     }
 
     public int GetCash()

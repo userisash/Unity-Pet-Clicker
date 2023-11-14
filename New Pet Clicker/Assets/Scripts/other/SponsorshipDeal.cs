@@ -13,4 +13,5 @@ public class SponsorshipDeal
     public float Timer;
     public int CashDistributed; // Track how much cash has already been distributed
     public float LastDistributionTime;
+    public bool CashPerMinuteDistributed = false;
 }
