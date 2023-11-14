@@ -28,10 +28,11 @@ public class SponsorshipManager : MonoBehaviour
     private float cashAccumulator = 0f;
     private bool exclusiveDealActive = false;
     private bool sponsorshipUnlocked = false;
+    private bool isDealPanelActive = false;
 
     private void Update()
     {
-        if (sponsorshipUnlocked)
+        if (sponsorshipUnlocked && !isDealPanelActive)
         {
             // Increment the timer
             sponsorshipTimer += Time.deltaTime;
@@ -135,6 +136,7 @@ public class SponsorshipManager : MonoBehaviour
 
         text.text = $"Earn ${newDeal.CashAmount} over {newDeal.Duration} seconds!";
         panel.SetActive(true);
+        isDealPanelActive = true;
     }
 
     private SponsorshipDeal GenerateNewDeal(SponsorshipType type)
@@ -180,6 +182,7 @@ public class SponsorshipManager : MonoBehaviour
 
     private void CloseCurrentDealPanel()
     {
+        isDealPanelActive = false;
         if (currentDealType == SponsorshipType.Exclusive)
         {
             sponsorshipDealPanelType1.SetActive(false);
