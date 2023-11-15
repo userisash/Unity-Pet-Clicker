@@ -15,7 +15,8 @@ public class ClickBehavior : MonoBehaviour
 
     public DonationsFeatureController donationsFeatureController;
     public NotificationManager notificationManager;
-    public SponsorshipManager sponsorshipManager; // Assign in the inspector
+    public SponsorshipManager sponsorshipManager;
+
 
 
     public GameObject flyingNumberPrefab; // Drag your created prefab here
@@ -27,8 +28,9 @@ public class ClickBehavior : MonoBehaviour
     public TextMeshProUGUI followersText;
     public TextMeshProUGUI cashText;
     public TextMeshProUGUI coinsText;
+    public TextMeshProUGUI cashTooltip;
 
-    private int viewsPerClick = 1000;
+    private int viewsPerClick = 5000;
     private int followersPerClick = 1; // for future upgrades
 
 
@@ -36,6 +38,10 @@ public class ClickBehavior : MonoBehaviour
 
     void Start()
     {
+        if (sponsorshipManager == null)
+        {
+            sponsorshipManager = FindObjectOfType<SponsorshipManager>();
+        }
 
         // Initialize with data from NumbersManager
         if (NumbersManager.Instance != null)
@@ -81,7 +87,7 @@ public class ClickBehavior : MonoBehaviour
 
     public void IncrementFollowers()
     {
-        Debug.Log("IncrementFollowers called");
+        
         int previousFollowers = followers;
         followers += followersPerClick;
         NumbersManager.Instance.UpdateFollowers(followers);
@@ -91,7 +97,7 @@ public class ClickBehavior : MonoBehaviour
             donationsFeatureController.TryGenerateDonation();
         }
 
-        //sponsorshipManager.CheckAndUnlockSponsorship();
+      
         CheckCounters();
     }
 
@@ -112,7 +118,6 @@ public class ClickBehavior : MonoBehaviour
     {
         if(followers >= 1000)
         {
-            
             notificationManager.AddNotification("Goal reached! Followers: 1000");
         }
         int maxIterations = 10; // for safety
@@ -182,6 +187,7 @@ public class ClickBehavior : MonoBehaviour
 
     public void AddCash(int amount)
     {
+        Debug.Log("Adding Cash");
         cash += amount;
         UpdateAllText();
     }
@@ -194,6 +200,14 @@ public class ClickBehavior : MonoBehaviour
         views = 0; // Reset views
         UpdateAllText(); // Update UI
     }
+
+    public void UpdateSponsorshipCashTooltip(int totalSponsorshipCash)
+    {
+        // Assuming you have a TextMeshProUGUI element for the tooltip
+        cashTooltip.text = $"Total Sponsorship Cash: {FormatNumber(totalSponsorshipCash)}";
+    }
+
+
     public string FormatNumber(double number)
     {
         if (number < 1000)
