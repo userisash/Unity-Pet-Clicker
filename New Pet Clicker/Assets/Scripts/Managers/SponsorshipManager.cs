@@ -1,136 +1,139 @@
 using UnityEngine;
-using System.Collections.Generic;
+using UnityEngine.UI;
+using System.Collections;
 using TMPro;
 
 public class SponsorshipManager : MonoBehaviour
 {
-    public GameObject sponsorshipDealPanel; // Only one panel for deals
-    public TextMeshProUGUI sponsorshipDealText;
-    public TextMeshProUGUI totalCashFromSponsorsText; // Tooltip text
-    public TextMeshProUGUI dealTimerText;
+    public ClickBehavior clickBehavior; // Reference to ClickBehavior script
+    public GameObject sponsorshipPanel; // Reference to the sponsorship panel UI
+    public TextMeshProUGUI descriptionText; // Text component to show deal description
+    public Button acceptButton; // Accept button
+    public Button rejectButton; // Reject button
+    public TextMeshProUGUI timerText; // Text component for the countdown timer
+    public TextMeshProUGUI cashReceivedTooltip; // Tooltip for cash received from sponsors
 
-    public NotificationManager notificationManager;
-    public ClickBehavior clickBehavior;
+    private bool isDealActive = false;
+    private bool isFirstDeal = true;
+    private float dealDuration = 300f; // 5 minutes
+    private float timeRemaining;
+    private int cashPerDeal;
+    private Coroutine dealCoroutine;
 
-    private SponsorshipDeal activeDeal; // Only one active deal at a time
-    private float nextDealTimer;
-    private const float MIN_DEAL_INTERVAL = 120f; // Minimum 2 minutes
-    private const float MAX_DEAL_INTERVAL = 600f; // Maximum 10 minutes
-
-    private int totalCashFromSponsors = 0;
-    private bool sponsorshipUnlocked = false;
-
-    private void Update()
+    void Start()
     {
-        if (sponsorshipUnlocked)
+        sponsorshipPanel.SetActive(false);
+        acceptButton.onClick.AddListener(AcceptDeal);
+        rejectButton.onClick.AddListener(RejectDeal);
+    }
+
+    void Update()
+    {
+        if (isDealActive)
         {
-            // Handle active deal
-            if (activeDeal != null)
-            {
-                HandleActiveDeal();
-            }
-            else
-            {
-                // Wait for next deal
-                nextDealTimer -= Time.deltaTime;
-                if (nextDealTimer <= 0)
-                {
-                    PresentSponsorshipOffer();
-                }
-            }
+            UpdateTimer();
+        }
+
+        // Check for first deal when player hits 10000 followers
+        if (isFirstDeal && clickBehavior.followers >= 10000)
+        {
+            PresentFirstDeal();
         }
     }
 
-    private void PresentSponsorshipOffer()
+    private void PresentFirstDeal()
     {
-        // Set up a new deal but don't start it yet
-        activeDeal = GenerateNewDeal();
-        sponsorshipDealText.text = $"Earn ${activeDeal.CashAmount} over {activeDeal.Duration} seconds!";
-        sponsorshipDealPanel.SetActive(true);
-        // Don't start the timer or show it yet
+        isFirstDeal = false;
+        PrepareAndShowDeal();
     }
 
-
-    private void HandleActiveDeal()
+    private void PrepareAndShowDeal()
     {
-        if (activeDeal != null && dealTimerText.gameObject.activeInHierarchy)
+        cashPerDeal = clickBehavior.followers / 100;
+        descriptionText.text = $"Receive {cashPerDeal} cash over 5 minutes.";
+        sponsorshipPanel.SetActive(true);
+    }
+
+    private IEnumerator WaitForNextDeal()
+    {
+        float waitTime = Random.Range(120f, 600f); // Random time between 2 to 10 minutes
+        yield return new WaitForSeconds(waitTime);
+        PrepareAndShowDeal();
+    }
+
+    private void AcceptDeal()
+    {
+        isDealActive = true;
+        timeRemaining = dealDuration;
+        dealCoroutine = StartCoroutine(DealDuration());
+        timerText.gameObject.SetActive(true);
+    }
+
+    private void RejectDeal()
+    {
+        sponsorshipPanel.SetActive(false);
+        StartCoroutine(WaitForNextDeal());
+    }
+
+    private IEnumerator DealDuration()
+    {
+        while (timeRemaining > 0)
         {
-            activeDeal.Timer -= Time.deltaTime;
-            dealTimerText.text = $"Time Remaining: {activeDeal.Timer:F2} s";
-
-            if (activeDeal.Duration - activeDeal.Timer >= activeDeal.LastDistributionTime + 60f && !activeDeal.CashPerMinuteDistributed)
-            {
-                DistributeCashForDeal(activeDeal);
-                activeDeal.LastDistributionTime = activeDeal.Duration - activeDeal.Timer;
-                activeDeal.CashPerMinuteDistributed = true;
-            }
-
-            if (activeDeal.Timer <= 0f)
-            {
-                EndDeal();
-            }
+            yield return new WaitForSeconds(60); // Distribute cash every minute
+            DistributeCash();
+            timeRemaining -= 60;
         }
+        CompleteDeal();
     }
 
-
-    public void AcceptSponsorshipDeal()
+    private void DistributeCash()
     {
-        // Start the deal when the player accepts
-        dealTimerText.gameObject.SetActive(true);
-        activeDeal.CashPerMinuteDistributed = false; // Reset flag for new deal
-        activeDeal.LastDistributionTime = 0f; // Reset the last distribution time
-        sponsorshipDealPanel.SetActive(false); // Close the panel
-    }
+        int cashToDistribute = Mathf.Min(cashPerDeal / 5, cashPerDeal);
 
-
-    private SponsorshipDeal GenerateNewDeal()
-    {
-        return new SponsorshipDeal
-        {
-            Duration = 300f, // 5 minutes
-            CashAmount = clickBehavior.followers / 100,
-            Timer = 300f,
-            CashDistributed = 0
-        };
-    }
-
-    private void DistributeCashForDeal(SponsorshipDeal deal)
-    {
-        int cashThisMinute = CalculateCashPerMinute(deal.CashAmount, deal.Duration);
-        int cashToDistribute = Mathf.Min(cashThisMinute, deal.CashAmount - deal.CashDistributed);
-
+        Debug.Log("Adding 1MIN cash");
         clickBehavior.AddCash(cashToDistribute);
-        deal.CashDistributed += cashToDistribute;
+        cashPerDeal -= cashToDistribute;
     }
 
-
-    private int CalculateCashPerMinute(int totalCash, float duration)
+    private void CompleteDeal()
     {
-        return Mathf.CeilToInt((float)totalCash / (duration / 60f));
-    }
-    private void EndDeal()
-    {
-        int remainingCash = activeDeal.CashAmount - activeDeal.CashDistributed;
-        if (remainingCash > 0)
+        Debug.Log("Adding last min cash");
+        clickBehavior.AddCash(cashPerDeal); // Add any remaining cash
+        if (dealCoroutine != null)
         {
-            clickBehavior.AddCash(remainingCash);
-            activeDeal.CashDistributed += remainingCash;
+            StopCoroutine(dealCoroutine);
         }
-
-        activeDeal = null;
-        dealTimerText.gameObject.SetActive(false);
-        nextDealTimer = Random.Range(MIN_DEAL_INTERVAL, MAX_DEAL_INTERVAL); // Set timer for next deal
+        isDealActive = false;
+        sponsorshipPanel.SetActive(false);
+        //UpdateSponsorshipCashTooltip();
+        timerText.gameObject.SetActive(false); // Disable the timer text
+        StartCoroutine(WaitForNextDeal()); // Start waiting for the next deal
     }
 
-    public void CheckAndUnlockSponsorship()
+    private void UpdateTimer()
     {
-        if (!sponsorshipUnlocked && clickBehavior.followers >= 10000)
+        if (timeRemaining > 0)
         {
-            sponsorshipUnlocked = true;
-            notificationManager.AddNotification("Sponsorship deals unlocked!");
-            nextDealTimer = 0; // Immediately present first deal
+            timerText.text = $"{timeRemaining:0} seconds remaining";
+            timeRemaining -= Time.deltaTime;
+        }
+        else
+        {
+            CompleteDeal();
         }
     }
 
-    // Additional methods...
+    private string FormatTime(float time)
+    {
+        int minutes = (int)(time / 60);
+        int seconds = (int)(time % 60);
+        return $"{minutes:00}:{seconds:00}";
+    }
+
+    //public void UpdateSponsorshipCashTooltip()
+    //{
+    //    Debug.Log("calculating cash");
+    //    // Update the tooltip with the total cash received from sponsors
+    //    cashReceivedTooltip.text = $"Total Cash from Sponsors: {clickBehavior.GetCash()}";
+    //}
 }
