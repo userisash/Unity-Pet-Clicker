@@ -33,6 +33,11 @@ public class Managers : MonoBehaviour
         managers[0].OnIncrement = ClickBehavior.IncrementViews;
         managers[1].OnIncrement = ClickBehavior.IncrementFollowers;
         managers[2].OnIncrement = ClickBehavior.IncrementCash;
+
+        foreach (var manager in managers)
+        {
+            UpdateManagerTexts(manager);
+        }
     }
 
     private void Update()
