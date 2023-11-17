@@ -30,7 +30,7 @@ public class ClickBehavior : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI cashTooltip;
 
-    private int viewsPerClick = 5000;
+    private int viewsPerClick = 1;
     private int followersPerClick = 1; // for future upgrades
 
 
