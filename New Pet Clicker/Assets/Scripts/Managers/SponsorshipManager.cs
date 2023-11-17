@@ -11,7 +11,7 @@ public class SponsorshipManager : MonoBehaviour
     public Button acceptButton; // Accept button
     public Button rejectButton; // Reject button
     public TextMeshProUGUI timerText; // Text component for the countdown timer
-    public TextMeshProUGUI cashReceivedTooltip; // Tooltip for cash received from sponsors
+
 
     private bool isDealActive = false;
     private bool isFirstDeal = true;
@@ -130,10 +130,5 @@ public class SponsorshipManager : MonoBehaviour
         return $"{minutes:00}:{seconds:00}";
     }
 
-    //public void UpdateSponsorshipCashTooltip()
-    //{
-    //    Debug.Log("calculating cash");
-    //    // Update the tooltip with the total cash received from sponsors
-    //    cashReceivedTooltip.text = $"Total Cash from Sponsors: {clickBehavior.GetCash()}";
-    //}
+   
 }

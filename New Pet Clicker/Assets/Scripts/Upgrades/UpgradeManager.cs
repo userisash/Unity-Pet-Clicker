@@ -17,7 +17,7 @@ public class Tier
     public int ViewsIncrement;
     public int FollowersIncrement;
     public int CashIncrement;
- 
+
 
     // Method to purchase this tier's upgrade
     public bool PurchaseUpgrade(ClickBehavior clickBehavior)
@@ -26,7 +26,14 @@ public class Tier
         {
             clickBehavior.AddCash(-Cost);
             clickBehavior.AddToClickValues(ViewsIncrement, FollowersIncrement, CashIncrement);
-            Cost *= 2;
+
+            Cost *= 2; // Double the cost
+
+            // Double the increment values
+            ViewsIncrement *= 2;
+            FollowersIncrement *= 2;
+            CashIncrement *= 2;
+
             UpdateTexts();
             return true;
         }

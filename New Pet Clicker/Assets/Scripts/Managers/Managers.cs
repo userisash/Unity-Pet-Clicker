@@ -32,7 +32,6 @@ public class Managers : MonoBehaviour
         // Assuming you have 3 managers in the order: Views, Followers, Cash
         managers[0].OnIncrement = ClickBehavior.IncrementViews;
         managers[1].OnIncrement = ClickBehavior.IncrementFollowers;
-        managers[2].OnIncrement = ClickBehavior.IncrementCash;
 
         foreach (var manager in managers)
         {
