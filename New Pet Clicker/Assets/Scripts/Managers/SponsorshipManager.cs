@@ -1,134 +1,129 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using TMPro;
+using System.Collections;
+using System.Collections.Generic;
+
+[System.Serializable]
+public class SponsorshipTier
+{
+    public int followersRequired;
+    public int cashReward;
+    public bool isUnlocked = false;
+    public Button unlockButton; // Reference to the unlock button
+}
 
 public class SponsorshipManager : MonoBehaviour
 {
-    public ClickBehavior clickBehavior; // Reference to ClickBehavior script
-    public GameObject sponsorshipPanel; // Reference to the sponsorship panel UI
-    public TextMeshProUGUI descriptionText; // Text component to show deal description
-    public Button acceptButton; // Accept button
-    public Button rejectButton; // Reject button
-    public TextMeshProUGUI timerText; // Text component for the countdown timer
+    public ClickBehavior clickBehavior;
+    public GameObject tierPrefab; // Prefab for each tier
+    public Transform contentTransform; // Content Transform of the ScrollView
+    public List<SponsorshipTier> sponsorshipTiers;
+    public GameObject panel; // Main panel that contains all tiers
+    public TextMeshProUGUI timerText;
 
-
-    private bool isDealActive = false;
-    private bool isFirstDeal = true;
-    private float dealDuration = 300f; // 5 minutes
+    private float rewardInterval = 300f; // 5 minutes
     private float timeRemaining;
-    private int cashPerDeal;
-    private Coroutine dealCoroutine;
+    private bool timerStarted = false;
 
     void Start()
     {
-        sponsorshipPanel.SetActive(false);
-        acceptButton.onClick.AddListener(AcceptDeal);
-        rejectButton.onClick.AddListener(RejectDeal);
+        panel.SetActive(false); // Hide panel initially
+        timerText.gameObject.SetActive(false);
+
+        foreach (var tier in sponsorshipTiers)
+        {
+            CreateTierUI(tier);
+        }
     }
 
     void Update()
     {
-        if (isDealActive)
+        if (timerStarted)
         {
             UpdateTimer();
         }
 
-        // Check for first deal when player hits 10000 followers
-        if (isFirstDeal && clickBehavior.followers >= 10000)
+        UpdateTierInteractability();
+    }
+
+    private void CreateTierUI(SponsorshipTier tier)
+    {
+        GameObject tierInstance = Instantiate(tierPrefab, contentTransform);
+        TextMeshProUGUI followersText = tierInstance.transform.Find("FollowersText").GetComponent<TextMeshProUGUI>();
+        Button unlockButton = tierInstance.transform.Find("UnlockButton").GetComponent<Button>();
+        TextMeshProUGUI rewardText = tierInstance.transform.Find("RewardText").GetComponent<TextMeshProUGUI>();
+
+        followersText.text = $"{tier.followersRequired} Followers Required";
+        rewardText.text = $"Reward: {tier.cashReward} cash per 5 minutes";
+
+        unlockButton.onClick.AddListener(() => UnlockTier(tier));
+        tier.unlockButton = unlockButton; // Store a reference to the unlock button
+    }
+
+    private void UpdateTierInteractability()
+    {
+        foreach (var tier in sponsorshipTiers)
         {
-            PresentFirstDeal();
+            tier.unlockButton.interactable = clickBehavior.followers >= tier.followersRequired && !tier.isUnlocked;
         }
     }
 
-    private void PresentFirstDeal()
+    private void UnlockTier(SponsorshipTier tier)
     {
-        isFirstDeal = false;
-        PrepareAndShowDeal();
+        if (clickBehavior.followers >= tier.followersRequired && !tier.isUnlocked)
+        {
+            tier.isUnlocked = true;
+            tier.unlockButton.interactable = false;
+            if (!timerStarted)
+            {
+                StartTimer();
+            }
+        }
     }
 
-    private void PrepareAndShowDeal()
+    private void StartTimer()
     {
-        cashPerDeal = clickBehavior.followers / 100;
-        descriptionText.text = $"Receive {cashPerDeal} cash over 5 minutes.";
-        sponsorshipPanel.SetActive(true);
-    }
-
-    private IEnumerator WaitForNextDeal()
-    {
-        float waitTime = Random.Range(120f, 600f); // Random time between 2 to 10 minutes
-        yield return new WaitForSeconds(waitTime);
-        PrepareAndShowDeal();
-    }
-
-    private void AcceptDeal()
-    {
-        isDealActive = true;
-        timeRemaining = dealDuration;
-        dealCoroutine = StartCoroutine(DealDuration());
+        timerStarted = true;
+        timeRemaining = rewardInterval;
         timerText.gameObject.SetActive(true);
+        StartCoroutine(RewardDistributionCoroutine());
     }
 
-    private void RejectDeal()
+    private IEnumerator RewardDistributionCoroutine()
     {
-        sponsorshipPanel.SetActive(false);
-        StartCoroutine(WaitForNextDeal());
-    }
-
-    private IEnumerator DealDuration()
-    {
-        while (timeRemaining > 0)
+        while (timerStarted)
         {
-            yield return new WaitForSeconds(60); // Distribute cash every minute
-            DistributeCash();
-            timeRemaining -= 60;
+            yield return new WaitForSeconds(rewardInterval);
+            DistributeRewards();
+            timeRemaining = rewardInterval;
         }
-        CompleteDeal();
     }
 
-    private void DistributeCash()
+    private void DistributeRewards()
     {
-        int cashToDistribute = Mathf.Min(cashPerDeal / 5, cashPerDeal);
-
-        Debug.Log("Adding 1MIN cash");
-        clickBehavior.AddCash(cashToDistribute);
-        cashPerDeal -= cashToDistribute;
-    }
-
-    private void CompleteDeal()
-    {
-        Debug.Log("Adding last min cash");
-        clickBehavior.AddCash(cashPerDeal); // Add any remaining cash
-        if (dealCoroutine != null)
+        foreach (var tier in sponsorshipTiers)
         {
-            StopCoroutine(dealCoroutine);
+            if (tier.isUnlocked)
+            {
+                clickBehavior.AddCash(tier.cashReward);
+            }
         }
-        isDealActive = false;
-        sponsorshipPanel.SetActive(false);
-        //UpdateSponsorshipCashTooltip();
-        timerText.gameObject.SetActive(false); // Disable the timer text
-        StartCoroutine(WaitForNextDeal()); // Start waiting for the next deal
     }
 
     private void UpdateTimer()
     {
-        if (timeRemaining > 0)
+        timeRemaining -= Time.deltaTime;
+        timerText.text = $"{timeRemaining:0} seconds remaining";
+
+        if (timeRemaining <= 0)
         {
-            timerText.text = $"{timeRemaining:0} seconds remaining";
-            timeRemaining -= Time.deltaTime;
-        }
-        else
-        {
-            CompleteDeal();
+            timeRemaining = rewardInterval;
         }
     }
 
-    private string FormatTime(float time)
+    public void TogglePanelVisibility()
     {
-        int minutes = (int)(time / 60);
-        int seconds = (int)(time % 60);
-        return $"{minutes:00}:{seconds:00}";
+        panel.SetActive(!panel.activeSelf);
     }
-
-   
 }
