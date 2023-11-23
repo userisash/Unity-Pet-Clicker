@@ -1645,6 +1645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e510ffb58cdb6248bc0fc8f59d5473c, type: 3}
+
 --- !u!1 &174549031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,7 +1783,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Increases views per click
 
-'
+
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f138ba473ffbc7e4b9c62cd62790a91e, type: 2}
   m_sharedMaterial: {fileID: -2185782041492516881, guid: f138ba473ffbc7e4b9c62cd62790a91e, type: 2}
@@ -4313,11 +4314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3df87129bae164ca6d41795e30c44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &398323982 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 142450920463409409, guid: 8e510ffb58cdb6248bc0fc8f59d5473c, type: 3}
-  m_PrefabInstance: {fileID: 168444506}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410184889
 GameObject:
   m_ObjectHideFlags: 0
@@ -6240,11 +6236,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579313386}
   m_CullTransparentMesh: 1
---- !u!224 &593459010 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 142450920463409409, guid: 8e510ffb58cdb6248bc0fc8f59d5473c, type: 3}
-  m_PrefabInstance: {fileID: 955550264}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &599269826
 GameObject:
   m_ObjectHideFlags: 0
@@ -7474,7 +7465,7 @@ MonoBehaviour:
   baseTaxCost: 50
   baseManagerCost: 50
   managerTierMultiplier: 1.5
-  timeToDeduct: 120
+  timeToDeduct: 30
   timeSlider: {fileID: 346778142}
   expensesPopup: {fileID: 196593978}
   upcomingTotalExpensesText: {fileID: 1585200440}
@@ -8670,6 +8661,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935122112}
   m_CullTransparentMesh: 1
+
 --- !u!1001 &955550264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11704,10 +11696,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1863862390}
-  - {fileID: 398323982}
-  - {fileID: 593459010}
+  m_Children: []
   m_Father: {fileID: 1100049403}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11748,7 +11737,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 7
-  m_StartCorner: 2
+  m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 520, y: 105}
   m_Spacing: {x: 0, y: 24.23}
@@ -14398,11 +14387,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857865456}
   m_CullTransparentMesh: 1
---- !u!224 &1863862390 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 142450920463409409, guid: 8e510ffb58cdb6248bc0fc8f59d5473c, type: 3}
-  m_PrefabInstance: {fileID: 1710571781}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1907317560
 GameObject:
   m_ObjectHideFlags: 0

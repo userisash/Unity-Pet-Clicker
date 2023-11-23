@@ -35,17 +35,7 @@ public class MonthlyExpenses : MonoBehaviour
         {
             currentTime = timeToDeduct; // Reset the timer
             DeductExpenses();
-            ResetViewsCounter();
             UpdateUpcomingExpensesUI(); // Update the UI after deducting expenses
-        }
-
-        if (currentCashText != null)
-        {
-            currentCashText.text = "$" + ClickBehavior.GetCash().ToString();
-        }
-        else
-        {
-            Debug.LogError("currentCashText is not assigned!");
         }
 
         UpdateSliderValue();
@@ -53,14 +43,11 @@ public class MonthlyExpenses : MonoBehaviour
 
     private void DeductExpenses()
     {
-        if (ClickBehavior.GetCash() <= 0)
-        {
-            return; // Exit the method early if cash is 0 or below.
-        }
-
         int totalExpenses = CalculateUpcomingExpenses();
         ClickBehavior.AddCash(-totalExpenses); // Deducting the expenses from cash
         UpdateCurrentCashUI(); // Update current cash UI after deduction
+
+        ResetViewsCounter(); // Reset views and update related values
     }
 
     private void ResetViewsCounter()
