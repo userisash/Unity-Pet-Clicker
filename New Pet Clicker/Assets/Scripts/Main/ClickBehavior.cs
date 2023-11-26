@@ -16,7 +16,7 @@ public class ClickBehavior : MonoBehaviour
     public DonationsFeatureController donationsFeatureController;
     public NotificationManager notificationManager;
     public SponsorshipManager sponsorshipManager;
-
+    public HappinessBar happinessBar;
 
 
     public GameObject flyingNumberPrefab; // Drag your created prefab here
@@ -72,6 +72,7 @@ public class ClickBehavior : MonoBehaviour
         }
 
         UpdateAllText();
+        happinessBar.DecreaseHappinessOnButtonClick();
     }
     
 
