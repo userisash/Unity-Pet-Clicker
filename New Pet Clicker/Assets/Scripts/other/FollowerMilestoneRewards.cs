@@ -4,7 +4,9 @@ public class FollowerMilestoneRewards : MonoBehaviour
 {
     public ClickBehavior clickBehavior;
     public NotificationManager notificationManager;
-    private int lastMilestoneReached = 0;
+    public Milestone[] followerMilestones; // Assign your milestone scriptable objects here
+
+    private int lastMilestoneIndex = 0;
 
     void Update()
     {
@@ -14,26 +16,29 @@ public class FollowerMilestoneRewards : MonoBehaviour
     private void CheckForMilestone()
     {
         int currentFollowers = clickBehavior.followers;
-        int nextMilestone = CalculateNextMilestone(lastMilestoneReached);
 
-        if (currentFollowers >= nextMilestone)
+        // Iterate through milestones
+        for (int i = lastMilestoneIndex; i < followerMilestones.Length; i++)
         {
-            RewardForMilestone(nextMilestone);
-            lastMilestoneReached = nextMilestone;
+            Milestone milestone = followerMilestones[i];
+
+            if (currentFollowers >= milestone.requiredFollowers)
+            {
+                RewardForMilestone(milestone);
+                lastMilestoneIndex = i + 1; // Move to the next milestone
+            }
+            else
+            {
+                break; // Stop checking for milestones if the current followers are not enough for the next milestone
+            }
         }
     }
 
-    private int CalculateNextMilestone(int lastMilestone)
+    private void RewardForMilestone(Milestone milestone)
     {
-        if (lastMilestone == 0) return 10; // First milestone
-
-        return lastMilestone * 10; // Next milestone is 10 times the last one
-    }
-
-    private void RewardForMilestone(int milestone)
-    {
-        int rewardAmount = milestone; // Reward amount is equal to the milestone reached
+        int rewardAmount = milestone.requiredFollowers; // Reward amount is equal to the milestone reached
         clickBehavior.AddCash(rewardAmount);
-        notificationManager.AddNotification($"Congratulations! You've reached {milestone} followers and received a gift of {rewardAmount} cash!");
+        notificationManager.AddNotification($"Congratulations! You've reached {milestone.requiredFollowers} followers and received a gift of {rewardAmount} cash!", milestone.milestoneImage);
     }
 }
+

@@ -1,112 +1,124 @@
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class NotificationManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI notificationText; // Assign in inspector
-    [SerializeField] private GameObject notificationLogPanel;  // Assign in inspector
-    [SerializeField] private TextMeshProUGUI notificationLogText; // Assign in inspector
-    public GameObject notificationPrefab; // Assign this in the inspector
-    public Transform logContent; // Assign the Content transform of the Scroll View in the inspector
+    [SerializeField] private GameObject notificationPrefab;
+    [SerializeField] private Transform logContent;
+    [SerializeField] private GameObject notificationLogPanel;
 
-
-    [SerializeField] private float displayTime = 3f; // Time to display each notification
-
-
-    private string lastNotification = "";
-    private Queue<string> notificationsQueue = new Queue<string>();
-    private List<string> notificationsHistory = new List<string>();
+    private Queue<NotificationData> notificationsQueue = new Queue<NotificationData>();
     private bool isDisplayingNotification = false;
 
     private void Start()
     {
-        notificationLogPanel.SetActive(false); // Assuming the log panel is initially set to inactive
+        notificationLogPanel.SetActive(false);
     }
 
     private void Update()
     {
         if (!isDisplayingNotification && notificationsQueue.Count > 0)
         {
-            StartCoroutine(DisplayNotification());
+            var data = notificationsQueue.Dequeue();
+            DisplayNotification(data);
         }
     }
 
-    private IEnumerator DisplayNotification()
+    private void DisplayNotification(NotificationData data)
     {
-        isDisplayingNotification = true;
-
-        while (notificationsQueue.Count > 0)
+        if (notificationPrefab == null)
         {
-            string message = notificationsQueue.Dequeue();
-            notificationText.text = message;
-            notificationText.gameObject.SetActive(true); // Assuming the text is initially set to inactive
-
-            AddToNotificationHistory(message);
-
-            yield return new WaitForSeconds(displayTime);
-
-            notificationText.gameObject.SetActive(false);
+            Debug.LogError("Notification Prefab is not assigned in the NotificationManager script.");
+            return;
         }
 
+        isDisplayingNotification = true;
+        GameObject newNotification = Instantiate(notificationPrefab, logContent);
+
+        // Set position above the canvas
+        RectTransform rt = newNotification.GetComponent<RectTransform>();
+        rt.anchoredPosition = new Vector2(450f, 100f); // Above the canvas (adjust as needed)
+
+        // Update text component
+        TextMeshProUGUI textComponent = newNotification.GetComponentInChildren<TextMeshProUGUI>();
+        if (textComponent == null)
+        {
+            Debug.LogError("Text component not found in the Notification Prefab.");
+            Destroy(newNotification);
+            return;
+        }
+        textComponent.text = data.Message;
+
+        // Update image component
+        Image imageComponent = newNotification.GetComponentInChildren<Image>();
+        if (imageComponent == null)
+        {
+            Debug.LogError("Image component not found in the Notification Prefab.");
+            Destroy(newNotification);
+            return;
+        }
+        imageComponent.sprite = data.Image;
+
+        // Use LeanTween for animation
+        float moveDuration = 1f;
+        float holdDuration = 2f;
+
+        LeanTween.moveY(rt, rt.anchoredPosition.y - 200f, moveDuration) // Move down within the canvas in 1 second
+            .setEaseOutQuad()
+            .setOnComplete(() =>
+            {
+                // Hold for 2 seconds
+                LeanTween.delayedCall(holdDuration, () =>
+                {
+                    // Move back up
+                    LeanTween.moveY(rt, rt.anchoredPosition.y + 200f, moveDuration)
+                        .setEaseOutQuad()
+                        .setOnComplete(() =>
+                        {
+                            StartCoroutine(DisableAfterDelay(newNotification, 2f)); // Hold for 5 seconds
+                        });
+                });
+            });
+    }
+
+
+
+    IEnumerator DisableAfterDelay(GameObject notification, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(notification);
         isDisplayingNotification = false;
     }
 
-    public void AddNotification(string message)
+    public void AddNotification(string message, Sprite image = null, string milestoneName = "")
     {
-       
-        if (message != lastNotification)
+        notificationsQueue.Enqueue(new NotificationData { Message = message, Image = image, MilestoneName = milestoneName });
+    }
+
+
+    public void CheckMilestones(int cash, int viewers, int followers, Milestone milestone)
+    {
+        if (cash >= milestone.requiredCash &&
+            viewers >= milestone.requiredViewers &&
+            followers >= milestone.requiredFollowers)
         {
-            notificationsQueue.Clear(); // Clear the queue to prioritize the new message
-            notificationsQueue.Enqueue(message);
-
-            if (isDisplayingNotification)
-            {
-                StopAllCoroutines(); // Stop the current notification
-                isDisplayingNotification = false;
-                notificationText.gameObject.SetActive(false); // Immediately hide the current notification
-            }
-
-            lastNotification = message;
+            AddNotification($"{milestone.milestoneName} achieved!", milestone.milestoneImage, milestone.milestoneName);
         }
     }
 
-    private void AddToNotificationHistory(string message)
-    {
-        // Only add the message to the history if it doesn't already exist
-        if (!notificationsHistory.Contains(message))
-        {
-            notificationsHistory.Add(message);
-            AddToLog(message); // This will create a new log entry
-        }
-    }
-
-
-    public void AddToLog(string message)
-    {
-        // Check if there is already a log entry with the same message
-        foreach (Transform child in logContent)
-        {
-            if (child.GetComponent<TextMeshProUGUI>().text == message)
-            {
-                return; // If found, do not add a duplicate
-            }
-        }
-
-        GameObject newNotification = Instantiate(notificationPrefab, logContent);
-        newNotification.GetComponent<TextMeshProUGUI>().text = message;
-        newNotification.transform.localScale = Vector3.one; // Ensure the scale is reset if it's different when instantiated
-        newNotification.transform.localPosition = Vector3.zero; // Reset position to align properly in the scroll view
-    }
-
-    private void UpdateNotificationLogText()
-    {
-        notificationLogText.text = string.Join("\n", notificationsHistory.ToArray());
-    }
 
     public void ToggleNotificationLogPanel()
     {
         notificationLogPanel.SetActive(!notificationLogPanel.activeSelf);
+    }
+
+    private class NotificationData
+    {
+        public string Message;
+        public Sprite Image;
+        public string MilestoneName; // Add this line
     }
 }
