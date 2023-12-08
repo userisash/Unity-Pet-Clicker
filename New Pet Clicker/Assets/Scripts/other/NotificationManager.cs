@@ -40,7 +40,7 @@ public class NotificationManager : MonoBehaviour
 
         // Set position above the canvas
         RectTransform rt = newNotification.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(0.5f, 1.2f); // Above the canvas (adjust as needed)
+        rt.anchoredPosition = new Vector2(450f, 100f); // Above the canvas (adjust as needed)
 
         // Update text component
         TextMeshProUGUI textComponent = newNotification.GetComponentInChildren<TextMeshProUGUI>();
@@ -66,7 +66,7 @@ public class NotificationManager : MonoBehaviour
         float moveDuration = 1f;
         float holdDuration = 2f;
 
-        LeanTween.moveY(rt, rt.anchoredPosition.y - 100f, moveDuration) // Move down within the canvas in 1 second
+        LeanTween.moveY(rt, rt.anchoredPosition.y - 200f, moveDuration) // Move down within the canvas in 1 second
             .setEaseOutQuad()
             .setOnComplete(() =>
             {
@@ -74,11 +74,11 @@ public class NotificationManager : MonoBehaviour
                 LeanTween.delayedCall(holdDuration, () =>
                 {
                     // Move back up
-                    LeanTween.moveY(rt, rt.anchoredPosition.y + 100f, moveDuration)
+                    LeanTween.moveY(rt, rt.anchoredPosition.y + 200f, moveDuration)
                         .setEaseOutQuad()
                         .setOnComplete(() =>
                         {
-                            StartCoroutine(DisableAfterDelay(newNotification, 5f)); // Hold for 5 seconds
+                            StartCoroutine(DisableAfterDelay(newNotification, 2f)); // Hold for 5 seconds
                         });
                 });
             });
