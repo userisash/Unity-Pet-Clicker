@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afd49d3138eb33044a8f3aa0970efdd3, type: 3}
-  m_Name: Happiness-2
+  m_Script: {fileID: 11500000, guid: 4f9ba88b06dc9384f800c2bda857d88a, type: 3}
+  m_Name: ball
   m_EditorClassIdentifier: 
-  itemName: Cat Toys
-  happinessEffect: 2
-  price: 20
-  itemSprite: {fileID: 21300000, guid: f3fab2c612dff094b940414d7b0483c0, type: 3}
-  isOwned: 1
+  name: ball
+  description: no desription
+  icon: {fileID: 21300000, guid: a21976dce761a724ab0dbce654c377e2, type: 3}
+  increaseAmount: 0.1
+  quantity: 33
