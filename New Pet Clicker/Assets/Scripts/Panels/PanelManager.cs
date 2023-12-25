@@ -6,7 +6,7 @@ public class PanelManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> panels = new List<GameObject>();
 
-    public float moveAmount = 500f; // Amount to move the panel
+    public float moveAmount = 50f; // Amount to move the panel
     public float speed = 1f; // Speed of the movement animation
     public float fadeSpeed = 0.5f; // Speed of the fade animation, faster than movement
 
@@ -70,11 +70,14 @@ public class PanelManager : MonoBehaviour
         foreach (var panel in panels)
         {
             panel.SetActive(false);
+
             if (panel.GetComponent<CanvasGroup>() == null)
             {
                 panel.AddComponent<CanvasGroup>();
             }
-            panel.transform.localPosition = new Vector3(-moveAmount, panel.transform.localPosition.y, panel.transform.localPosition.z);
+
+            RectTransform rectTransform = panel.GetComponent<RectTransform>();
+            rectTransform.anchoredPosition = new Vector2(-moveAmount, rectTransform.anchoredPosition.y);
         }
     }
 }
