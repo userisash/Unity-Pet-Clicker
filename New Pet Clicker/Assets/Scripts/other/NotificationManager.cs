@@ -40,7 +40,7 @@ public class NotificationManager : MonoBehaviour
 
         // Set position above the canvas
         RectTransform rt = newNotification.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(450f, 100f); // Above the canvas (adjust as needed)
+        rt.anchoredPosition = new Vector2(920f, 100f); // Above the canvas (adjust as needed)
 
         // Update text component
         TextMeshProUGUI textComponent = newNotification.GetComponentInChildren<TextMeshProUGUI>();

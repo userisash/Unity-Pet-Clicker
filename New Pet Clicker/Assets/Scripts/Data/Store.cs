@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Store : MonoBehaviour
 {
-    public Inventory playerInventory;
+    
     public ClickBehavior currencySystem; // Assuming your ClickBehavior script has currency related methods
     public List<Item> storeItems = new List<Item>(); // Items the store sells
     public GameObject itemPrefab; // This is a prefab of the item UI (e.g., a panel with icon, name, price...)
@@ -30,7 +30,7 @@ public class Store : MonoBehaviour
         if (currencySystem.GetCash() >= item.price)
         {
             currencySystem.AddCash(-item.price);
-            playerInventory.AddItem(item);
+            
         }
         else
         {
