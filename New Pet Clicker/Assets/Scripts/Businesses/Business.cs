@@ -9,13 +9,19 @@ public class Business
     public Sprite businessImage;
     public int cashReward;
     public float fillDuration;
+    public float energyCost; // New addition
 
     // UI Elements
     public TMPro.TextMeshProUGUI nameText;
     public Image businessImg;
     public Button startBusinessButton;
     public Slider progressBar;
+
+    // Other business-related fields
+    public bool isRunning;
+    public float timePassed;
 }
+
 
 
 

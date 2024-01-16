@@ -11,7 +11,7 @@ public class MonthlyExpenses : MonoBehaviour
     public int baseManagerCost = 50; // Base cost for a manager
     public float managerTierMultiplier = 1.5f; // Multiplier to increase manager cost with each tier
 
-    public float timeToDeduct = 300f; // Time in seconds (5 minutes = 300 seconds by default).
+    public float timeToDeduct = 30f; // Time in seconds (5 minutes = 300 seconds by default).
 
     public Slider timeSlider;
     public GameObject expensesPopup; // The entire popup

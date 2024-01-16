@@ -98,7 +98,7 @@ public class ClickBehavior : MonoBehaviour
             donationsFeatureController.TryGenerateDonation();
         }
 
-      
+        UpdateAllText();
         CheckCounters();
     }
 
@@ -117,10 +117,7 @@ public class ClickBehavior : MonoBehaviour
 
     public void CheckCounters()
     {
-        if(followers >= 1000)
-        {
-            notificationManager.AddNotification("Goal reached! Followers: 1000");
-        }
+        
         int maxIterations = 10; // for safety
 
         int iterations = 0;
@@ -200,6 +197,8 @@ public class ClickBehavior : MonoBehaviour
         monthlyViews = views; // Set monthlyViews to the current views before reset
         views = 0; // Reset views
         UpdateAllText(); // Update UI
+
+        lastAwardedFollowersAtViews = 0;
     }
 
     public void UpdateSponsorshipCashTooltip(int totalSponsorshipCash)
