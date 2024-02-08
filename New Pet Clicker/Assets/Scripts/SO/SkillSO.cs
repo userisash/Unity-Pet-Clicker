@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Skill", menuName = "Skill")]
@@ -9,6 +8,10 @@ public class SkillSO : ScriptableObject
     public int xp; // Current absolute XP points
     public int xpRequiredForNextLevel;
     public Sprite skillIcon;
+    public GameObject skillUIPrefab; // Reference to the UI prefab
+
+    // Define an event for XP change
+    public event System.Action OnXPChanged;
 
     // Calculates the relative XP value for the UI (0 to 1)
     public float GetRelativeXP()
@@ -24,6 +27,9 @@ public class SkillSO : ScriptableObject
         {
             LevelUp();
         }
+
+        // Trigger the XP changed event
+        OnXPChanged?.Invoke();
     }
 
     private void LevelUp()

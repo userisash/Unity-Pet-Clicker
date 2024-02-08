@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: team leading advanced
   m_EditorClassIdentifier: 
   courseTitle: Advanced leading program
-  cost: 300
-  associatedSkill: {fileID: 0}
+  cost: 20
+  associatedSkill: {fileID: 11400000, guid: 511004c484f4e5342b129c3267e30264, type: 2}
   xpReward: 150
   rewardDescription: 'you get xp and that '

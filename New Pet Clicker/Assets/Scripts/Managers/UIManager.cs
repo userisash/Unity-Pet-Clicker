@@ -1,29 +1,48 @@
-
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public SkillUIComponent[] skillUIComponents;
+    public Transform skillUIParent;  // Assign the parent for instantiated skill UIs
+    public SkillSO[] skills;
 
-    public void UpdateSkillUI(SkillSO skill)
+    void Start()
     {
-        foreach (var skillUI in skillUIComponents)
+        foreach (var skill in skills)
         {
-            if (skillUI.skill == skill)
-            {
-                skillUI.xpBar.value = skill.GetRelativeXP();
-                skillUI.levelText.text = "Level: " + skill.level.ToString();
-            }
+            // Instantiate the skill UI prefab
+            GameObject skillUIObj = Instantiate(skill.skillUIPrefab, skillUIParent);
+
+            // Assign the UI elements to the instantiated prefab
+            Image skillImage = skillUIObj.transform.Find("SkillImage").GetComponent<Image>();
+            TMP_Text titleText = skillUIObj.transform.Find("TitleText").GetComponent<TMP_Text>();
+            TMP_Text levelText = skillUIObj.transform.Find("LevelText").GetComponent<TMP_Text>();
+
+            // Find the XPBar Image component
+            Image progressBarImage = skillUIObj.transform.Find("XPBar").GetComponent<Image>();
+
+            // Initialize the UI elements with skill data
+            skillImage.sprite = skill.skillIcon;
+            titleText.text = skill.skillName;
+            progressBarImage.fillAmount = skill.GetRelativeXP(); // Set the fill amount directly
+            levelText.text = "Lvl " + skill.level.ToString();
         }
     }
 
-    [System.Serializable]
-    public class SkillUIComponent
+    public void UpdateSkillUI(SkillSO skill)
     {
-        public SkillSO skill;
-        public Slider xpBar;
-        public TMP_Text levelText;
+        foreach (var skillUIObj in skillUIParent.GetComponentsInChildren<Transform>())
+        {
+            // Find the skill UI object for the corresponding skill
+            if (skillUIObj != null)
+            {
+                // Find the XPBar Image component
+                Image progressBarImage = skillUIObj.transform.Find("XPBar").GetComponent<Image>();
+
+                // Update the fill amount of the XPBar directly
+                progressBarImage.fillAmount = skill.GetRelativeXP();
+            }
+        }
     }
 }
