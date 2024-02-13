@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class ClickBehavior : MonoBehaviour
 {
@@ -68,13 +68,13 @@ public class ClickBehavior : MonoBehaviour
 
             IncrementViews();
             ShowFlyingNumberEffect(viewsPerClick);
-            
+
         }
 
         UpdateAllText();
         happinessBar.DecreaseHappinessOnButtonClick();
     }
-    
+
 
     public void IncrementViews()
     {
@@ -88,7 +88,7 @@ public class ClickBehavior : MonoBehaviour
 
     public void IncrementFollowers()
     {
-        
+
         int previousFollowers = followers;
         followers += followersPerClick;
         NumbersManager.Instance.UpdateFollowers(followers);
@@ -117,7 +117,7 @@ public class ClickBehavior : MonoBehaviour
 
     public void CheckCounters()
     {
-        
+
         int maxIterations = 10; // for safety
 
         int iterations = 0;
@@ -128,7 +128,7 @@ public class ClickBehavior : MonoBehaviour
             iterations++;
         }
 
-       
+
 
     }
 
@@ -138,9 +138,9 @@ public class ClickBehavior : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         GameObject numberInstance = Instantiate(flyingNumberPrefab, mousePos, Quaternion.identity, uiCanvasTransform);
         TextMeshProUGUI numberText = numberInstance.GetComponent<TextMeshProUGUI>();
-        numberText.text =  $"+{FormatNumber(incrementValue)}";
+        numberText.text = $"+{FormatNumber(incrementValue)}";
 
-       
+
 
         // Start the move animation
         StartCoroutine(MoveNumberToTarget(numberInstance.transform, viewsText.transform.position, 2f));

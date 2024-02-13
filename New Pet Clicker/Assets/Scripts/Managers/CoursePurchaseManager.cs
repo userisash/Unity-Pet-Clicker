@@ -1,17 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class CoursePurchaseManager : MonoBehaviour
 {
-
     private UIManager uiManager;
     public ClickBehavior playerStats;
-
 
     void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
         // Other initialization code...
     }
+
     public void PurchaseCourse(CourseSO course)
     {
         if (course.associatedSkill == null || playerStats == null)
@@ -27,11 +28,17 @@ public class CoursePurchaseManager : MonoBehaviour
             SkillSO skill = course.associatedSkill;
             skill.AddXP(course.xpReward);
 
-
             // Update UI
             if (uiManager != null)
             {
-                uiManager.UpdateSkillUI(course.associatedSkill);
+                // Find the Image component of the progress bar
+                Image progressBarImage = uiManager.GetProgressBarImage(skill);
+
+                // Find the TMP_Text component for the level text
+                TMP_Text levelText = uiManager.GetLevelText(skill);
+
+                // Update the skill UI
+                uiManager.UpdateSkillUI(skill, progressBarImage, levelText);
             }
         }
         else

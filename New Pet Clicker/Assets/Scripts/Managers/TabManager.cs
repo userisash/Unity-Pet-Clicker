@@ -12,6 +12,7 @@ public class TabManager : MonoBehaviour
         tab1Content.SetActive(true);
         tab2Content.SetActive(false);
         tab3Content.SetActive(false);
+        ForceUpdateUI();
     }
 
     public void ShowTab2()
@@ -19,6 +20,7 @@ public class TabManager : MonoBehaviour
         tab1Content.SetActive(false);
         tab2Content.SetActive(true);
         tab3Content.SetActive(false);
+        ForceUpdateUI();
     }
 
     public void ShowTab3()
@@ -26,5 +28,11 @@ public class TabManager : MonoBehaviour
         tab1Content.SetActive(false);
         tab2Content.SetActive(false);
         tab3Content.SetActive(true);
+        ForceUpdateUI();
+    }
+
+    private void ForceUpdateUI()
+    {
+        Canvas.ForceUpdateCanvases();
     }
 }
