@@ -6,14 +6,12 @@ public class BusinessController : MonoBehaviour
     public Business business;
     public ClickBehavior clickBehavior;
 
+    private Button startBusinessButton; // Reference to the button component
+
     private void Start()
     {
-        InitializeBusiness();
-    }
-
-    private void Update()
-    {
-        UpdateBusiness();
+        // Assuming the button is a child of the business GameObject
+        startBusinessButton = GetComponentInChildren<Button>();
     }
 
     public void Initialize(Business newBusiness, ClickBehavior clickBehaviorReference)
@@ -25,14 +23,11 @@ public class BusinessController : MonoBehaviour
         business.nameText.text = business.businessName;
         business.businessImg.sprite = business.businessImage;
 
+        // Add listener to the button
         business.startBusinessButton.onClick.AddListener(StartBusiness);
 
         // Register with BusinessManager
         WorkManager.Instance.RegisterBusiness(this);
-    }
-    private void InitializeBusiness()
-    {
-        business.startBusinessButton.onClick.AddListener(StartBusiness);
     }
 
     private void StartBusiness()
@@ -43,6 +38,9 @@ public class BusinessController : MonoBehaviour
             // Energy is consumed, proceed with business logic
             business.isRunning = true;
             business.timePassed = 0;
+
+            // Disable the button while the business is running
+            startBusinessButton.interactable = false;
         }
         else
         {
@@ -64,6 +62,9 @@ public class BusinessController : MonoBehaviour
                 clickBehavior.AddCash(business.cashReward);
                 business.progressBar.value = 0;
                 business.isRunning = false;
+
+                // Enable the button when the business is done
+                startBusinessButton.interactable = true;
             }
         }
     }
