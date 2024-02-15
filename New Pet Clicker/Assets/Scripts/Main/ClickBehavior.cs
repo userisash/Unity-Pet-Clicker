@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class ClickBehavior : MonoBehaviour
 {
@@ -12,6 +12,8 @@ public class ClickBehavior : MonoBehaviour
     public int followers = 0;
     public int cash = 0;
     public int coins = 0;
+    private int lastCashAwardAtFollowers = 0;
+
 
     public DonationsFeatureController donationsFeatureController;
     public NotificationManager notificationManager;
@@ -60,21 +62,21 @@ public class ClickBehavior : MonoBehaviour
 
         if (randomChance == 90) // you can choose any number between 1 and 150, I chose 75 as an example.
         {
-            //views += 1000;
-            //CheckCounters();
+            views += 1000;
+            CheckCounters();
         }
         else
         {
 
             IncrementViews();
             ShowFlyingNumberEffect(viewsPerClick);
-            
+
         }
 
         UpdateAllText();
         happinessBar.DecreaseHappinessOnButtonClick();
     }
-    
+
 
     public void IncrementViews()
     {
@@ -88,19 +90,21 @@ public class ClickBehavior : MonoBehaviour
 
     public void IncrementFollowers()
     {
-        
         int previousFollowers = followers;
         followers += followersPerClick;
         NumbersManager.Instance.UpdateFollowers(followers);
-        // If followers increased by at least 10, attempt to generate donation
+
+        // If followers increased by at least 10, attempt to generate a donation
         if ((followers / 10) > (previousFollowers / 10))
         {
             donationsFeatureController.TryGenerateDonation();
         }
 
+        CheckAndAwardCashForFollowers(); // Check for cash award based on follower count
         UpdateAllText();
         CheckCounters();
     }
+
 
 
     public void IncrementCash()
@@ -115,9 +119,30 @@ public class ClickBehavior : MonoBehaviour
         UpdateAllText();
     }
 
+    public void CheckAndAwardCashForFollowers()
+    {
+        if (followers >= 500)
+        {
+            // Determine the cash award based on every 1000 followers
+            int cashAward = (followers / 1000) * Random.Range(3, 6); // For every 1000 followers, award between 3 to 5 cash
+
+            // Optionally, you can limit the cash award to only happen once per certain threshold or every time they pass another 1000 followers
+            // This is an example to give cash once per 1000 followers increment
+            if (lastCashAwardAtFollowers / 1000 < followers / 1000)
+            {
+                AddCash(cashAward);
+                lastCashAwardAtFollowers = followers;
+                // Optionally, show a notification for receiving cash
+                notificationManager?.AddNotification($"Earned {cashAward} cash from followers!");
+            }
+        }
+    }
+
+
+
     public void CheckCounters()
     {
-        
+
         int maxIterations = 10; // for safety
 
         int iterations = 0;
@@ -128,7 +153,7 @@ public class ClickBehavior : MonoBehaviour
             iterations++;
         }
 
-       
+
 
     }
 
@@ -138,9 +163,9 @@ public class ClickBehavior : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         GameObject numberInstance = Instantiate(flyingNumberPrefab, mousePos, Quaternion.identity, uiCanvasTransform);
         TextMeshProUGUI numberText = numberInstance.GetComponent<TextMeshProUGUI>();
-        numberText.text =  $"+{FormatNumber(incrementValue)}";
+        numberText.text = $"+{FormatNumber(incrementValue)}";
 
-       
+
 
         // Start the move animation
         StartCoroutine(MoveNumberToTarget(numberInstance.transform, viewsText.transform.position, 2f));

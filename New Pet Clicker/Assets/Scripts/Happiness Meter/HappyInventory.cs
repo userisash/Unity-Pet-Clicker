@@ -32,7 +32,6 @@ public class HappyInventory : MonoBehaviour
                 continue;
             }
 
-            Debug.Log("Processing item: " + item.name);
 
             GameObject slot = Instantiate(inventorySlotPrefab, itemsParent);
 

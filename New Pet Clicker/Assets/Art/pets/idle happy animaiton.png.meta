@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 71ec77cd098841041a57f15284791d76
+guid: 47ea5fa7ff059694b99d57dd29037533
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pet sprite_0
+      name: idle happy animaiton_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e5c4a28616c4904caae2c25c5629c59
-      internalID: -1399632159
+      spriteID: 7ac71df7ddc112144b204062d58d3050
+      internalID: -467705393
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_1
+      name: idle happy animaiton_1
       rect:
         serializedVersion: 2
         x: 880
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5372f156d08342a4bb98d4a6c3cbf29b
-      internalID: 17566455
+      spriteID: c57af1ef12d99244c9cfc9b28544854b
+      internalID: 611534953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_2
+      name: idle happy animaiton_2
       rect:
         serializedVersion: 2
         x: 1760
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88cb96af7bf728540babbd49324d61aa
-      internalID: 944064036
+      spriteID: c3fc09da54c29ba43a4035b7d7e26756
+      internalID: -1991429149
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_3
+      name: idle happy animaiton_3
       rect:
         serializedVersion: 2
         x: 2640
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59720b22353587b4d98726d4789aa18e
-      internalID: 302299676
+      spriteID: 435b91761f8e68244872757e98ca609d
+      internalID: -925935016
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_4
+      name: idle happy animaiton_4
       rect:
         serializedVersion: 2
         x: 3520
@@ -203,14 +203,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f0fce8c590e09b488694d77463ac0e9
-      internalID: -1843224375
+      spriteID: 86c0309c8e46eee46b0da71d6b697970
+      internalID: -990042328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_5
+      name: idle happy animaiton_5
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 2640
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a01a845488007a641b534d49630a9de5
+      internalID: 322340129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle happy animaiton_6
       rect:
         serializedVersion: 2
         x: 0
@@ -224,14 +245,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b95f0eb7cbeafe044b8d27c0f5640919
-      internalID: -1003695416
+      spriteID: 390c4304eb1c650459d01b409ef9898e
+      internalID: 1846852041
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_6
+      name: idle happy animaiton_7
       rect:
         serializedVersion: 2
         x: 880
@@ -245,14 +266,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aad51884c8cb9404c85d2c58ab96e3d0
-      internalID: -946206296
+      spriteID: 8c8459b4a70b6bf45b717b4fafbcad0c
+      internalID: -636757143
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_7
+      name: idle happy animaiton_8
       rect:
         serializedVersion: 2
         x: 1760
@@ -266,14 +287,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fee44c1734b91f343b2801a4f2c5d748
-      internalID: -428446952
+      spriteID: 97c205eee8912e648a73e60c3208a789
+      internalID: -1501319688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_8
+      name: idle happy animaiton_9
       rect:
         serializedVersion: 2
         x: 2640
@@ -287,14 +308,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 481416cc24d3c484da30a5d72a3d71a1
-      internalID: 1066279573
+      spriteID: 4e970f08661d2284eb330e757cf83d14
+      internalID: 420550819
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_9
+      name: idle happy animaiton_10
       rect:
         serializedVersion: 2
         x: 3520
@@ -308,14 +329,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89c44a2429e235240a315d6d51a66440
-      internalID: 1506304143
+      spriteID: ade43dc362974994ebf52b88e716e228
+      internalID: 1426158380
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_10
+      name: idle happy animaiton_11
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 1760
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce8f31aab4346f243873d1fdffb037c2
+      internalID: -1890746793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle happy animaiton_12
       rect:
         serializedVersion: 2
         x: 0
@@ -329,14 +371,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79e3b24dd0903e545bc81f917198e1d2
-      internalID: -816812792
+      spriteID: ed4c9448ff32a084aa84d7e46bb0ed34
+      internalID: 1905026101
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_11
+      name: idle happy animaiton_13
       rect:
         serializedVersion: 2
         x: 880
@@ -350,14 +392,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f693e44075274242915586031fdff94
-      internalID: -2141886535
+      spriteID: 12ec6342da88ba14c881b329ff6b9d2f
+      internalID: -1009305757
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_12
+      name: idle happy animaiton_14
       rect:
         serializedVersion: 2
         x: 1760
@@ -371,14 +413,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b9e4d0cbbe12914189bc489c30516a5
-      internalID: -669035995
+      spriteID: f1275e356e4541545bc1b964126c5eaf
+      internalID: -2107435947
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_13
+      name: idle happy animaiton_15
       rect:
         serializedVersion: 2
         x: 2640
@@ -392,14 +434,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 139f436a7774d9d40a41559793552e50
-      internalID: 263289091
+      spriteID: 4c6c1a9699bd1964391ae32951b5b70f
+      internalID: 1918252999
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_14
+      name: idle happy animaiton_16
       rect:
         serializedVersion: 2
         x: 3520
@@ -413,14 +455,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73cde26fbe178fa43996af756a8e9950
-      internalID: 81398321
+      spriteID: e38b2a195f781704194e5f7b67012f9d
+      internalID: -1830643944
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_15
+      name: idle happy animaiton_17
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 880
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a3d7638e19b39c49a626b24f3c7b2f7
+      internalID: -1089315354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle happy animaiton_18
       rect:
         serializedVersion: 2
         x: 0
@@ -434,14 +497,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ee9d0071f9af5540965a4183fa2fd80
-      internalID: -596611341
+      spriteID: 1cc8bd68b95caf544b688639689a60bc
+      internalID: -1244036380
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet sprite_16
+      name: idle happy animaiton_19
       rect:
         serializedVersion: 2
         x: 880
@@ -455,8 +518,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfd19fa4813e98045bbe291fe99805dd
-      internalID: 1067573894
+      spriteID: 52baad3fa3ec26649a87d1bd004a2854
+      internalID: 1816782142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle happy animaiton_20
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77ba34d18afed1546be9a2cc6456161f
+      internalID: 441782523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle happy animaiton_21
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1413a9174b548d74aaa9c7f6a2833791
+      internalID: -631140247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle happy animaiton_22
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af8d86e64af2cac4b808de26834838b9
+      internalID: -1128853207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle happy animaiton_23
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 0
+        width: 880
+        height: 880
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 827cfb29bfc06d54b9582b7b16e888bc
+      internalID: -2145329219
       vertices: []
       indices: 
       edges: []
@@ -472,23 +619,30 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pet sprite_0: -1399632159
-      pet sprite_1: 17566455
-      pet sprite_10: -816812792
-      pet sprite_11: -2141886535
-      pet sprite_12: -669035995
-      pet sprite_13: 263289091
-      pet sprite_14: 81398321
-      pet sprite_15: -596611341
-      pet sprite_16: 1067573894
-      pet sprite_2: 944064036
-      pet sprite_3: 302299676
-      pet sprite_4: -1843224375
-      pet sprite_5: -1003695416
-      pet sprite_6: -946206296
-      pet sprite_7: -428446952
-      pet sprite_8: 1066279573
-      pet sprite_9: 1506304143
+      idle happy animaiton_0: -467705393
+      idle happy animaiton_1: 611534953
+      idle happy animaiton_10: 1426158380
+      idle happy animaiton_11: -1890746793
+      idle happy animaiton_12: 1905026101
+      idle happy animaiton_13: -1009305757
+      idle happy animaiton_14: -2107435947
+      idle happy animaiton_15: 1918252999
+      idle happy animaiton_16: -1830643944
+      idle happy animaiton_17: -1089315354
+      idle happy animaiton_18: -1244036380
+      idle happy animaiton_19: 1816782142
+      idle happy animaiton_2: -1991429149
+      idle happy animaiton_20: 441782523
+      idle happy animaiton_21: -631140247
+      idle happy animaiton_22: -1128853207
+      idle happy animaiton_23: -2145329219
+      idle happy animaiton_3: -925935016
+      idle happy animaiton_4: -990042328
+      idle happy animaiton_5: 322340129
+      idle happy animaiton_6: 1846852041
+      idle happy animaiton_7: -636757143
+      idle happy animaiton_8: -1501319688
+      idle happy animaiton_9: 420550819
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
