@@ -12,6 +12,7 @@ public class SkillSO : ScriptableObject
 
     // Define an event for XP change
     public event System.Action OnXPChanged;
+    public event System.Action OnLevelUp;
 
     // Calculates the relative XP value for the UI (0 to 1)
     public float GetRelativeXP()
@@ -37,6 +38,8 @@ public class SkillSO : ScriptableObject
         xp -= xpRequiredForNextLevel;
         level++;
         xpRequiredForNextLevel = CalculateXPRequirementForLevel(level);
+
+        OnLevelUp?.Invoke(); // Invoke level up event
     }
 
     private int CalculateXPRequirementForLevel(int level)

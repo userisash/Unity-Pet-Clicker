@@ -10,7 +10,7 @@ public class BusinessManager
     public string managerName;
     public int reward; // Reward player gets when the bar fills up
     public int cost;
-    
+
     public BusinessController associatedBusinessController;
 
     [HideInInspector]
