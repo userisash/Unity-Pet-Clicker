@@ -6,16 +6,17 @@ using TMPro;
 
 public class HappyInventory : MonoBehaviour
 {
-    public OwnedItems owneditems;
+    public OwnedItems ownedItems;
     public Transform itemsParent;
     public GameObject inventorySlotPrefab; // Prefab for the UI slot
     public HappinessBar happinessBar; // Reference to the HappinessBar script
+    public EnergyController energyController; // Reference to the EnergyController script
 
     void Start()
     {
-        if (inventorySlotPrefab == null || itemsParent == null || happinessBar == null)
+        if (inventorySlotPrefab == null || itemsParent == null || happinessBar == null || energyController == null)
         {
-            Debug.LogError("Inventory slot prefab, items parent, or HappinessBar not assigned!");
+            Debug.LogError("Inventory slot prefab, items parent, HappinessBar, or EnergyController not assigned!");
             return;
         }
 
@@ -24,14 +25,13 @@ public class HappyInventory : MonoBehaviour
 
     void PopulateInventory()
     {
-        foreach (HappinessItem item in owneditems)
+        foreach (Item item in ownedItems)
         {
             if (item == null)
             {
                 Debug.LogWarning("Item is null!");
                 continue;
             }
-
 
             GameObject slot = Instantiate(inventorySlotPrefab, itemsParent);
 
@@ -68,19 +68,39 @@ public class HappyInventory : MonoBehaviour
     }
 
     // Function to handle item consumption
-    void ConsumeItem(HappinessItem item, TextMeshProUGUI quantityText)
+    void ConsumeItem(Item item, TextMeshProUGUI quantityText)
     {
         // Check if there are enough items
         if (item.quantity > 0)
         {
-            // Add the increaseAmount to the happiness bar
-            happinessBar.IncreaseHappiness(item.increaseAmount);
+            // Check if it's an energy item
+            if (item.EnergyAmount > 0)
+            {
+                // Consume energy
+                if (energyController.energy.ConsumeEnergy(item.EnergyAmount))
+                {
+                    // Subtract the quantity
+                    item.quantity--;
 
-            // Subtract the quantity
-            item.quantity--;
+                    // Update the quantity text directly
+                    quantityText.text = item.quantity.ToString();
+                }
+                else
+                {
+                    Debug.LogWarning("Not enough energy to consume!");
+                }
+            }
+            else
+            {
+                // Add the increaseAmount to the happiness bar
+                happinessBar.IncreaseHappiness(item.increaseAmount);
 
-            // Update the quantity text directly
-            quantityText.text = item.quantity.ToString();
+                // Subtract the quantity
+                item.quantity--;
+
+                // Update the quantity text directly
+                quantityText.text = item.quantity.ToString();
+            }
         }
         else
         {

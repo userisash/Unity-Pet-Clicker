@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,3 +33,4 @@ public class ItemUI : MonoBehaviour
         buyButton.interactable = currencySystem.GetCash() >= item.price;
     }
 }
+*/

@@ -16,12 +16,17 @@ public class Energy
     // Current energy level
     private float currentEnergy;
 
-    public void Initialize()
+    public void Initialize(Slider energySlider)
     {
         // Set initial values
         currentEnergy = maxEnergy;
+
+        // Set the slider reference
+        progressBar = energySlider;
+
         UpdateUI();
     }
+
 
     public void UpdateEnergy()
     {
