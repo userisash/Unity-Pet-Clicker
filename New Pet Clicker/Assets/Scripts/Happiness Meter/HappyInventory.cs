@@ -70,41 +70,28 @@ public class HappyInventory : MonoBehaviour
     // Function to handle item consumption
     void ConsumeItem(Item item, TextMeshProUGUI quantityText)
     {
-        // Check if there are enough items
         if (item.quantity > 0)
+    {
+        if (item.isEnergyItem)
         {
-            // Check if it's an energy item
-            if (item.EnergyAmount > 0)
-            {
-                // Consume energy
-                if (energyController.energy.ConsumeEnergy(item.EnergyAmount))
-                {
-                    // Subtract the quantity
-                    item.quantity--;
-
-                    // Update the quantity text directly
-                    quantityText.text = item.quantity.ToString();
-                }
-                else
-                {
-                    Debug.LogWarning("Not enough energy to consume!");
-                }
-            }
-            else
-            {
-                // Add the increaseAmount to the happiness bar
-                happinessBar.IncreaseHappiness(item.increaseAmount);
-
-                // Subtract the quantity
-                item.quantity--;
-
-                // Update the quantity text directly
-                quantityText.text = item.quantity.ToString();
-            }
+            // Add the EnergyAmount to the energy bar
+            EnergyController.Instance.energy.IncreaseEnergy(item.EnergyAmount);
         }
         else
         {
-            Debug.LogWarning("Not enough items to consume!");
+            // Add the increaseAmount to the happiness bar
+            happinessBar.IncreaseHappiness(item.increaseAmount);
         }
+
+        // Subtract the quantity
+        item.quantity--;
+
+        // Update the quantity text directly
+        quantityText.text = item.quantity.ToString();
+    }
+    else
+    {
+        Debug.LogWarning("Not enough items to consume!");
+    }
     }
 }

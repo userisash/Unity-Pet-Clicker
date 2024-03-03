@@ -58,6 +58,14 @@ public class Energy
         }
     }
 
+    public void IncreaseEnergy(float amount)
+    {
+        currentEnergy += amount;
+        currentEnergy = Mathf.Clamp(currentEnergy, 0f, maxEnergy);
+        UpdateUI();
+    }
+
+
     private void UpdateUI()
     {
         // Update UI elements based on the current energy level

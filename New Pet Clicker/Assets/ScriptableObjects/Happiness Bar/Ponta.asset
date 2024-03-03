@@ -16,6 +16,6 @@ MonoBehaviour:
   description: 
   icon: {fileID: 21300000, guid: eb4f04b19caa03d48b3e4a91c2a11c65, type: 3}
   increaseAmount: 0
-  quantity: 2
+  quantity: 20
   isEnergyItem: 1
-  EnergyAmount: -10
+  EnergyAmount: 10
