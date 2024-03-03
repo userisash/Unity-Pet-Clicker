@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "OwnedItems", menuName = "Inventory/OwnedItems")]
-public class OwnedItems : ScriptableObject, IEnumerable<HappinessItem>
+public class OwnedItems : ScriptableObject, IEnumerable<Item>
 {
-    public List<HappinessItem> items = new List<HappinessItem>();
+    public List<Item> items = new List<Item>();
 
-    public IEnumerator<HappinessItem> GetEnumerator()
+    public IEnumerator<Item> GetEnumerator()
     {
         return items.GetEnumerator();
     }
