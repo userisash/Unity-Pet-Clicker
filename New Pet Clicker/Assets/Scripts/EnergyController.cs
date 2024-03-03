@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class EnergyController : MonoBehaviour
 {
     public Energy energy;
-    public static EnergyController Instance;
+    public Slider energySlider; // Drag your energy slider here in the Unity Editor
 
+    public static EnergyController Instance;
 
     private void Awake()
     {
@@ -22,12 +22,11 @@ public class EnergyController : MonoBehaviour
 
     void Start()
     {
-        energy.Initialize();
+        energy.Initialize(energySlider);
     }
 
     void Update()
     {
         energy.UpdateEnergy();
     }
-
 }

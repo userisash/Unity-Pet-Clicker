@@ -16,12 +16,17 @@ public class Energy
     // Current energy level
     private float currentEnergy;
 
-    public void Initialize()
+    public void Initialize(Slider energySlider)
     {
         // Set initial values
         currentEnergy = maxEnergy;
+
+        // Set the slider reference
+        progressBar = energySlider;
+
         UpdateUI();
     }
+
 
     public void UpdateEnergy()
     {
@@ -52,6 +57,14 @@ public class Energy
             return false; // Not enough energy to consume
         }
     }
+
+    public void IncreaseEnergy(float amount)
+    {
+        currentEnergy += amount;
+        currentEnergy = Mathf.Clamp(currentEnergy, 0f, maxEnergy);
+        UpdateUI();
+    }
+
 
     private void UpdateUI()
     {
