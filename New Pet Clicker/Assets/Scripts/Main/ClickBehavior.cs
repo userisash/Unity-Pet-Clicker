@@ -124,7 +124,7 @@ public class ClickBehavior : MonoBehaviour
         if (followers >= 500)
         {
             // Determine the cash award based on every 1000 followers
-            int cashAward = (followers / 1000) * Random.Range(3, 6); // For every 1000 followers, award between 3 to 5 cash
+            int cashAward = (followers / 1000) * Random.Range(2, 5); // For every 1000 followers, award between 3 to 5 cash
 
             // Optionally, you can limit the cash award to only happen once per certain threshold or every time they pass another 1000 followers
             // This is an example to give cash once per 1000 followers increment
