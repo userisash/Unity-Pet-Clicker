@@ -30,6 +30,8 @@ public class BusinessManager
     public float fillRateMultiplier = 1f;
 }
 
+
+
 public class BusinessManagers : MonoBehaviour
 {
     public ClickBehavior ClickBehavior;
@@ -59,20 +61,26 @@ public class BusinessManagers : MonoBehaviour
             Debug.Log($"Purchased manager: {manager.managerName}. Starting business...");
             ClickBehavior.AddCash(-manager.cost);
 
+            // Increase fill rate multiplier here
+            manager.fillRateMultiplier += 0.5f; // Or use any other logic to increase the rate
+
             if (manager.isActive)
             {
-                // If already active, stop the coroutine and restart it
-                StopCoroutine(RunBusiness(manager));
+                // If already active, just update the fill rate without restarting the coroutine
+                // This assumes your coroutine can dynamically adjust to fillRateMultiplier changes
             }
-
-            StartCoroutine(RunBusiness(manager));
-            manager.isActive = true;
+            else
+            {
+                StartCoroutine(RunBusiness(manager));
+                manager.isActive = true;
+            }
 
             manager.cost *= 2; // Increase the cost for next time
 
             UpdateManagerTexts(manager);
         }
     }
+
 
 
     private IEnumerator RunBusiness(BusinessManager manager)
