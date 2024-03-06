@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948beceeb7ad3234d8957ac84676fd0e, type: 3}
   m_Name: Pet Master
   m_EditorClassIdentifier: 
-  skillName: 
+  skillName: Pet Master
   level: 0
   xp: 0
-  xpRequiredForNextLevel: 0
+  xpRequiredForNextLevel: 100
+  skillIcon: {fileID: 21300000, guid: 94dd44f739d2d8640ae6857a8988064f, type: 3}
+  skillUIPrefab: {fileID: 391023934814419912, guid: 5d8a5e8565996f242afb02a62541bebd, type: 3}
