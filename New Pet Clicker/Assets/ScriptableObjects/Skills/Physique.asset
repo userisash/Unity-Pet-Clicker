@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948beceeb7ad3234d8957ac84676fd0e, type: 3}
-  m_Name: Marketing
+  m_Name: Physique
   m_EditorClassIdentifier: 
-  skillName: Marketing
+  skillName: Physique
   level: 0
   xp: 0
   xpRequiredForNextLevel: 100
-  skillIcon: {fileID: 21300000, guid: bb47400fa7fd02249bbdde37f8e1467d, type: 3}
+  skillIcon: {fileID: 0}
   skillUIPrefab: {fileID: 391023934814419912, guid: 5d8a5e8565996f242afb02a62541bebd, type: 3}

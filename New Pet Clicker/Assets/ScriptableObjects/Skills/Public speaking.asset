@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948beceeb7ad3234d8957ac84676fd0e, type: 3}
   m_Name: Public speaking
   m_EditorClassIdentifier: 
-  skillName: marketing
+  skillName: Public Speaking
   level: 0
   xp: 0
   xpRequiredForNextLevel: 80
