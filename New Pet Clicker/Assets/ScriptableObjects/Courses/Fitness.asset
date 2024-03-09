@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5275ce7392b054493ce9d0f2e1f031, type: 3}
   m_Name: Fitness
   m_EditorClassIdentifier: 
-  courseTitle: 
-  cost: 0
-  associatedSkill: {fileID: 0}
-  xpReward: 0
-  rewardDescription: 
+  courseTitle: Fitness And Physique Education
+  cost: 10
+  associatedSkill: {fileID: 11400000, guid: 1754bc64b153c114191ef496aa3b9aa0, type: 2}
+  xpReward: 50
+  rewardDescription: Fitness +50Exp
