@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: charisma
   m_EditorClassIdentifier: 
   skillName: Charisma
-  level: 1
-  xp: 70
-  xpRequiredForNextLevel: 120
+  level: 7
+  xp: 111
+  xpRequiredForNextLevel: 358
   skillIcon: {fileID: 21300000, guid: ba250a74c3f691e49b6584ed7de1b9c9, type: 3}
   skillUIPrefab: {fileID: 391023934814419912, guid: 5d8a5e8565996f242afb02a62541bebd, type: 3}
-  initialXpForFirstLevel: 0

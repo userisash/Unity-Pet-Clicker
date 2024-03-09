@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Physique
   m_EditorClassIdentifier: 
   skillName: Physique
-  level: 0
-  xp: 0
-  xpRequiredForNextLevel: 100
+  level: 5
+  xp: 107
+  xpRequiredForNextLevel: 248
   skillIcon: {fileID: 0}
   skillUIPrefab: {fileID: 391023934814419912, guid: 5d8a5e8565996f242afb02a62541bebd, type: 3}
