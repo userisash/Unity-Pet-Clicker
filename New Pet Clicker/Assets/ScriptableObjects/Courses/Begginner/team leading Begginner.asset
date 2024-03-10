@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: team leading Begginner
   m_EditorClassIdentifier: 
   courseTitle: Begginner leading program
-  cost: 20
+  cost: 100
   associatedSkill: {fileID: 11400000, guid: 511004c484f4e5342b129c3267e30264, type: 2}
-  xpReward: 150
+  xpReward: 50
   rewardDescription: 'you get xp and that '

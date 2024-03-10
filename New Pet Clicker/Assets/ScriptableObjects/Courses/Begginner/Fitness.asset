@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fitness
   m_EditorClassIdentifier: 
   courseTitle: Fitness And Physique Education
-  cost: 10
+  cost: 100
   associatedSkill: {fileID: 11400000, guid: 1754bc64b153c114191ef496aa3b9aa0, type: 2}
   xpReward: 50
   rewardDescription: Fitness +50Exp

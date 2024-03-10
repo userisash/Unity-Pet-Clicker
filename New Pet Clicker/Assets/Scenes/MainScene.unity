@@ -25057,8 +25057,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ebac7f56386a6574090bf6eea9934ba7, type: 2}
   - {fileID: 11400000, guid: 7249d8e1c27dd0f4a9c4620960460812, type: 2}
   - {fileID: 11400000, guid: c6971c51ecaff9a4886e03454d36cc06, type: 2}
-  intermediateCourses: []
-  advancedCourses: []
+  intermediateCourses:
+  - {fileID: 11400000, guid: 8f5e2f7f37c32b44682f2b107feff842, type: 2}
+  - {fileID: 11400000, guid: 5ab024ecfb0942a4ca109c01ef5af338, type: 2}
+  - {fileID: 11400000, guid: 5c2ff6b318b9ab44690e5250a223995d, type: 2}
+  - {fileID: 11400000, guid: f42ae2ed66e441e4f95bacda45df7b41, type: 2}
+  - {fileID: 11400000, guid: 2122af37bfb147049802aa82b1efea93, type: 2}
+  advancedCourses:
+  - {fileID: 11400000, guid: 4ec5757ecfb7ff14db29f015bbc8ca5a, type: 2}
+  - {fileID: 11400000, guid: 628f09b6cb2f0b9469ec0c7118cbe931, type: 2}
+  - {fileID: 11400000, guid: 2b9c0aa7e924a454e8b062e663d903b5, type: 2}
+  - {fileID: 11400000, guid: a9bf2c7665f6d754aae92569343d9a9e, type: 2}
+  - {fileID: 11400000, guid: abcd73e861d5f55429faaa31c9b1a86a, type: 2}
 --- !u!114 &1489898187
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pet Care Intermediate Level
   m_EditorClassIdentifier: 
   courseTitle: Pet Care Training Intermediate
-  cost: 0
-  associatedSkill: {fileID: 0}
-  xpReward: 0
+  cost: 300
+  associatedSkill: {fileID: 11400000, guid: 6aebef8ba387340409fc8c0737e3b74c, type: 2}
+  xpReward: 100
   rewardDescription: 
