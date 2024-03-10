@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5275ce7392b054493ce9d0f2e1f031, type: 3}
   m_Name: Team Leading Advanced 2
   m_EditorClassIdentifier: 
-  courseTitle: 'Advanced leading program '
-  cost: 0
-  associatedSkill: {fileID: 0}
-  xpReward: 0
+  courseTitle: Advanced leading program 2
+  cost: 600
+  associatedSkill: {fileID: 11400000, guid: 511004c484f4e5342b129c3267e30264, type: 2}
+  xpReward: 200
   rewardDescription: 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pet Care Training
   m_EditorClassIdentifier: 
   courseTitle: Pet Care Training
-  cost: 10
+  cost: 100
   associatedSkill: {fileID: 11400000, guid: 6aebef8ba387340409fc8c0737e3b74c, type: 2}
   xpReward: 50
   rewardDescription: Pet Master +50Exp

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fitness Advanced
   m_EditorClassIdentifier: 
   courseTitle: Fitness And Physique Education Advanced
-  cost: 0
-  associatedSkill: {fileID: 0}
-  xpReward: 0
+  cost: 600
+  associatedSkill: {fileID: 11400000, guid: 1754bc64b153c114191ef496aa3b9aa0, type: 2}
+  xpReward: 200
   rewardDescription: 

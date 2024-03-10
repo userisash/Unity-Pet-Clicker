@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5275ce7392b054493ce9d0f2e1f031, type: 3}
   m_Name: Team Leading Intermediate
   m_EditorClassIdentifier: 
-  courseTitle: Intermediate leading program 2
-  cost: 0
-  associatedSkill: {fileID: 0}
-  xpReward: 0
+  courseTitle: 'Intermediate leading program '
+  cost: 300
+  associatedSkill: {fileID: 11400000, guid: 34e1a8e0e3fc93847a6f263e67a3d59a, type: 2}
+  xpReward: 100
   rewardDescription: 

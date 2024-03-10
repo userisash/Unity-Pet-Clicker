@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Economics Advanced
   m_EditorClassIdentifier: 
   courseTitle: Economics Advanced
-  cost: 0
-  associatedSkill: {fileID: 0}
-  xpReward: 0
+  cost: 600
+  associatedSkill: {fileID: 11400000, guid: df920023162f0b4449ece14ff2e2c95f, type: 2}
+  xpReward: 200
   rewardDescription: 
