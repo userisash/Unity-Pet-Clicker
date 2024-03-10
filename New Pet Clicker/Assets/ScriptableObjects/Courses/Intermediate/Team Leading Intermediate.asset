@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab5275ce7392b054493ce9d0f2e1f031, type: 3}
-  m_Name: Pet Care Training
+  m_Name: Team Leading Intermediate
   m_EditorClassIdentifier: 
-  courseTitle: Pet Care Training
-  cost: 10
-  associatedSkill: {fileID: 11400000, guid: 6aebef8ba387340409fc8c0737e3b74c, type: 2}
-  xpReward: 50
-  rewardDescription: Pet Master +50Exp
+  courseTitle: 'Intermediate leading program '
+  cost: 300
+  associatedSkill: {fileID: 11400000, guid: 34e1a8e0e3fc93847a6f263e67a3d59a, type: 2}
+  xpReward: 100
+  rewardDescription: 

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5275ce7392b054493ce9d0f2e1f031, type: 3}
+  m_Name: Pet Care Training
+  m_EditorClassIdentifier: 
+  courseTitle: Pet Care Training
+  cost: 100
+  associatedSkill: {fileID: 11400000, guid: 6aebef8ba387340409fc8c0737e3b74c, type: 2}
+  xpReward: 50
+  rewardDescription: Pet Master +50Exp

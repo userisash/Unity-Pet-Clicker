@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab5275ce7392b054493ce9d0f2e1f031, type: 3}
-  m_Name: Economics
+  m_Name: Fitness Intermediate Level
   m_EditorClassIdentifier: 
-  courseTitle: Economics
-  cost: 10
-  associatedSkill: {fileID: 11400000, guid: df920023162f0b4449ece14ff2e2c95f, type: 2}
-  xpReward: 50
-  rewardDescription: Marketing +50Exp
+  courseTitle: Fitness And Physique Education Intermediate
+  cost: 300
+  associatedSkill: {fileID: 11400000, guid: 1754bc64b153c114191ef496aa3b9aa0, type: 2}
+  xpReward: 100
+  rewardDescription: 
