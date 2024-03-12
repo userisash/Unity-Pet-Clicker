@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab5275ce7392b054493ce9d0f2e1f031, type: 3}
-  m_Name: team leading Begginner
+  m_Name: New Fitness
   m_EditorClassIdentifier: 
-  courseTitle: Begginner leading program
+  courseTitle: 
   cost: 100
-  associatedSkill: {fileID: 11400000, guid: 34e1a8e0e3fc93847a6f263e67a3d59a, type: 2}
+  associatedSkill: {fileID: 11400000, guid: 1754bc64b153c114191ef496aa3b9aa0, type: 2}
   xpReward: 50
-  rewardDescription: 'you get xp and that '
+  rewardDescription: 
